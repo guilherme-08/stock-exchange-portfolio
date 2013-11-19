@@ -14,7 +14,7 @@ namespace Common
         public enum Actions
         {
             GetQuote,
-            GetGoogleImageSearch
+            GetTable
         }
 
         private static Uri getUrlFromAction(Actions action, params object[] parameters)
@@ -23,8 +23,8 @@ namespace Common
             {
                 case Actions.GetQuote:
                     return new Uri(string.Format("http://finance.yahoo.com/d/quotes?f=sl1d1t1v&s={0}", parameters));
-                case Actions.GetGoogleImageSearch:
-                    return new Uri(string.Format("http://ichart.finance.yahoo.com/table.txt?{0}&g=d&s={1}", parameters));
+                case Actions.GetTable:
+                    return new Uri(string.Format("http://ichart.finance.yahoo.com/table.txt?{0}", parameters));
             }
             return null;
         }

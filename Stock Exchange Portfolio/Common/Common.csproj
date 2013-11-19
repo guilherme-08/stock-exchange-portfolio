@@ -38,7 +38,10 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YahooRequests\YahooTableRequest.cs" />
     <Compile Include="YahooResponses\YahooQuote.cs" />
+    <Compile Include="YahooResponses\YahooTable.cs" />
+    <Compile Include="YahooResponses\YahooTableEntry.cs" />
     <Compile Include="YahooSerializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
