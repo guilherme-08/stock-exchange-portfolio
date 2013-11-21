@@ -24,6 +24,25 @@ namespace Common.YahooRequests
         public int? FinalMonth;
         public int? FinalYear;
 
+        public DateTime InitialDate
+        {
+            set
+            {
+                this.InitialDay = value.Day - 1;
+                this.InitialMonth = value.Month - 1;
+                this.InitialYear = value.Year;
+            }
+        }
+        public DateTime FinalDate
+        {
+            set
+            {
+                this.FinalDay = value.Day - 1;
+                this.FinalMonth = value.Month - 1;
+                this.FinalYear = value.Year;
+            }
+        }
+
         public PeriodicityTypes Periodicity = PeriodicityTypes.Daily;
 
         public YahooTableRequest(string Name)
