@@ -24,11 +24,12 @@ namespace Common
                 {
                     string[] dataValues = data.Split(',');
                     var resultYahooQuote = new YahooQuote();
-                    resultYahooQuote.Name = dataValues[0];
-                    resultYahooQuote.Value = Double.Parse(dataValues[1], CultureInfo.InvariantCulture);
-                    resultYahooQuote.DateString = dataValues[2];
-                    resultYahooQuote.Time = dataValues[3];
-                    resultYahooQuote.Volume = UInt32.Parse(dataValues[4]);
+                    resultYahooQuote.Name = dataValues[0].Trim('"');
+                    resultYahooQuote.ShortName = dataValues[1].Trim('"');
+                    resultYahooQuote.Value = Double.Parse(dataValues[2], CultureInfo.InvariantCulture);
+                    resultYahooQuote.DateString = dataValues[3];
+                    resultYahooQuote.Time = dataValues[4].Trim('"');
+                    resultYahooQuote.Volume = UInt32.Parse(dataValues[5]);
                     return resultYahooQuote;
                 }
                 case "YahooTable":

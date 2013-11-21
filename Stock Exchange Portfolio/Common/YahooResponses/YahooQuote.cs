@@ -8,14 +8,16 @@ namespace Common.YahooResponses
 {
     public class YahooQuote
     {
-        public String Name;
+        public String Name { get; set; }
 
-        public Double Value;
+        public String ShortName { get; set; }
 
-        public String DateString;
+        public Double Value { get; set; }
 
-        public String Time;
+        public String DateString { get; set; }
 
-        public UInt32 Volume;
+        public String Time { get; set; }
+
+        public UInt32 Volume { get; set; }
     }
 }

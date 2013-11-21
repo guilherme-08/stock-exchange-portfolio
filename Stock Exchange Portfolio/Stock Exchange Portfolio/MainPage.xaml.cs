@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 using Common;
 using Common.YahooResponses;
 using Common.YahooRequests;
+using System.Collections.ObjectModel;
+using AmCharts.Windows.QuickCharts;
 
 namespace Stock_Exchange_Portfolio
 {
@@ -41,9 +43,16 @@ namespace Stock_Exchange_Portfolio
             yahooTableGoogleRequest.FinalMonth = 9;
             yahooTableGoogleRequest.FinalYear = 2013;
 
-
             // http://ichart.finance.yahoo.com/table.txt?a=9&b=5&c=2013&d=9&e=19&f=2013&g=d&s=GOOG
             var yahooTableGoogle = await API.GetAsync<YahooTable>(API.Actions.GetTable, yahooTableGoogleRequest.ToString());
+        }
+
+        private async void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
+            App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, "GOOG");
+            App.StockInfoViewModel.YahooQuote.ShortName = "GOOG";
+            NavigationService.Navigate(new Uri("/StockInfoPage.xaml", UriKind.Relative));
         }
     }
 }

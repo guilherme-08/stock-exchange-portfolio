@@ -8,18 +8,18 @@ namespace Common.YahooResponses
 {
     public class YahooTableEntry
     {
-        public String DateString;
+        public String DateString { get; set; }
 
-        public Double Open;
+        public Double Open { get; set; }
 
-        public Double High;
+        public Double High { get; set; }
 
-        public Double Low;
+        public Double Low { get; set; }
 
-        public Double Close;
+        public Double Close { get; set; }
 
-        public UInt32 Volume;
+        public UInt32 Volume { get; set; }
 
-        public Double AdjustedClose;
+        public Double AdjustedClose { get; set; }
     }
 }

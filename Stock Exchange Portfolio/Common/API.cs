@@ -17,19 +17,19 @@ namespace Common
             GetTable
         }
 
-        private static Uri getUrlFromAction(Actions action, params object[] parameters)
+        private static Uri getUrlFromAction(Actions action, params string[] parameters)
         {
             switch (action)
             {
                 case Actions.GetQuote:
-                    return new Uri(string.Format("http://finance.yahoo.com/d/quotes?f=sl1d1t1v&s={0}", parameters));
+                    return new Uri(string.Format("http://finance.yahoo.com/d/quotes?f=nsl1d1t1v&s={0}", parameters));
                 case Actions.GetTable:
                     return new Uri(string.Format("http://ichart.finance.yahoo.com/table.txt?{0}", parameters));
             }
             return null;
         }
 
-        public static async Task<T> GetAsync<T>(Actions action, params object[] parameters)
+        public static async Task<T> GetAsync<T>(Actions action, params string[] parameters)
         {
             Uri uri = getUrlFromAction(action, parameters);
 
