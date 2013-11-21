@@ -58,8 +58,7 @@
             </phone:Panorama.Background>
 
             <!--Panorama item one-->
-            <phone:PanoramaItem Header="firstx item">
-                <!--Single line list with text wrapping-->
+            <phone:PanoramaItem Header="portfolio">
                 <StackPanel>
                     <amq:SerialChart
                         Name="pie1"

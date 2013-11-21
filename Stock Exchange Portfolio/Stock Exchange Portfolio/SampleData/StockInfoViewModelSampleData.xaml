@@ -1,0 +1,19 @@
+﻿<vm:StockInfoViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Stock_Exchange_Portfolio.ViewModels"
+    xmlns:responses="clr-namespace:Common.YahooResponses;assembly=Common"
+    Stocks="20">
+
+    <vm:StockInfoViewModel.YahooQuote xmlns:responses="clr-namespace:Common.YahooResponses;assembly=Common">
+        <responses:YahooQuote Name="Google" DateString="20-11-2013" Time="16:21" Value="10" Volume="1222" ShortName="GOOG">
+        </responses:YahooQuote>
+    </vm:StockInfoViewModel.YahooQuote>
+
+    <vm:StockInfoViewModel.YahooTable xmlns:responses="clr-namespace:Common.YahooResponses;assembly=Common">
+        <responses:YahooTableEntry DateString="20-11-2013" Open="10" High="11" Close="10" Volume="1222" AdjustedClose="10" />
+        <responses:YahooTableEntry DateString="21-11-2013" Open="10" High="11" Close="12" Volume="1222" AdjustedClose="10" />
+        <responses:YahooTableEntry DateString="22-11-2013" Open="10" High="11" Close="16" Volume="1222" AdjustedClose="10" />
+        <responses:YahooTableEntry DateString="23-11-2013" Open="10" High="11" Close="14" Volume="1222" AdjustedClose="10" />
+    </vm:StockInfoViewModel.YahooTable>
+</vm:StockInfoViewModel>
