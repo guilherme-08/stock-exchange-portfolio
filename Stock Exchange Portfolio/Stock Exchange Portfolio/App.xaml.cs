@@ -10,6 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Stock_Exchange_Portfolio.Resources;
 using Stock_Exchange_Portfolio.ViewModels;
+using System.IO.IsolatedStorage;
 
 namespace Stock_Exchange_Portfolio
 {
@@ -76,6 +77,8 @@ namespace Stock_Exchange_Portfolio
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+
+                IsolatedCommonSettings.AttachToCommonSettings();
             }
 
         }

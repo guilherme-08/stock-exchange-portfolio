@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock Exchange Portfolio", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{7541EAC7-842C-49F6-AA5E-3281EE19906A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveTilesController", "LiveTilesController\LiveTilesController.csproj", "{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,18 @@ Global
 		{7541EAC7-842C-49F6-AA5E-3281EE19906A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7541EAC7-842C-49F6-AA5E-3281EE19906A}.Release|ARM.ActiveCfg = Release|Any CPU
 		{7541EAC7-842C-49F6-AA5E-3281EE19906A}.Release|x86.ActiveCfg = Release|Any CPU
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|ARM.Build.0 = Debug|ARM
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|x86.ActiveCfg = Debug|x86
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Debug|x86.Build.0 = Debug|x86
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|ARM.ActiveCfg = Release|ARM
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|ARM.Build.0 = Release|ARM
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|x86.ActiveCfg = Release|x86
+		{BFAEAE0D-EC1E-43FC-B2A6-396FFC811B1F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

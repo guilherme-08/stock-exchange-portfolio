@@ -33,6 +33,8 @@ namespace Stock_Exchange_Portfolio
                 App.ViewModel.LoadData();
             }
 
+            Settings.Portfolio.Add(new StockPosition() { Name = "GOOG", NumberOfShares = 10 });
+
             //var yahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, "GOOG");
             // http://ichart.finance.yahoo.com/table.txt?a=9&b=5&c=2013&d=9&e=19&f=2013&g=d&s=GOOG
             var yahooTableGoogleRequest = new YahooTableRequest("GOOG");
