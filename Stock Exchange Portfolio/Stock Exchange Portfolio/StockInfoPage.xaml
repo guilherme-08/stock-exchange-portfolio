@@ -31,9 +31,9 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="add to portfolio" Click="AddToPortfolio"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.addto.png" Text="add to watchlist"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="pin to sart"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.addto.png" Text="add to favorite"/>
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="add to portfolio"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

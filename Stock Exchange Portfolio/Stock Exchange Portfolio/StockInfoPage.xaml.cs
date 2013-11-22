@@ -38,6 +38,21 @@ namespace Stock_Exchange_Portfolio
             progressBar.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (App.StockInfoViewModel.Stocks > 0 && ApplicationBar.Buttons.Count == 3)
+            {
+                var sellButton = new ApplicationBarIconButton(new Uri("Assets/AppBar/minus.png", UriKind.Relative));
+                sellButton.Text = "sell";
+                sellButton.Click += OnSellButtonClick;
+                ApplicationBar.Buttons.Insert(1, sellButton);
+            }
+            else if (App.StockInfoViewModel.Stocks == 0 && ApplicationBar.Buttons.Count == 4)
+            {
+                ApplicationBar.Buttons.RemoveAt(1);
+            }
+        }
+
         private async void OnStocksGraphsSelectionChanged(object sender, SelectionChangedEventArgs args)
         {
             var index = pStocksGraphs.SelectedIndex;
@@ -53,6 +68,16 @@ namespace Stock_Exchange_Portfolio
                 progressBar.IsIndeterminate = false;
                 progressBar.Visibility = System.Windows.Visibility.Collapsed;
             }
+        }
+
+        private void AddToPortfolio(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AddPositionPage.xaml", UriKind.Relative));
+        }
+
+        private void OnSellButtonClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/ClosePositionPage.xaml", UriKind.Relative));
         }
     }
 }

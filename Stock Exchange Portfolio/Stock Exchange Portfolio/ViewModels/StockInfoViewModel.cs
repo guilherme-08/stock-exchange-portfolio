@@ -1,4 +1,5 @@
-﻿using Common.YahooResponses;
+﻿using Common;
+using Common.YahooResponses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,21 +30,12 @@ namespace Stock_Exchange_Portfolio.ViewModels
             }
         }
 
-        private uint stocks;
-
         public uint Stocks
         {
             get
             {
-                return stocks;
-            }
-            set
-            {
-                if (value != stocks)
-                {
-                    stocks = value;
-                    NotifyPropertyChanged("Stocks");
-                }
+                var stockPosition = Settings.Portfolio.GetStockPosition(YahooQuote.ShortName);
+                return stockPosition == null ? 0 : stockPosition.NumberOfShares;
             }
         }
         public ObservableCollection<YahooTable> YahooTables { get; private set; }
@@ -79,6 +71,11 @@ namespace Stock_Exchange_Portfolio.ViewModels
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        internal void StocksChanged()
+        {
+            NotifyPropertyChanged("Stocks");
         }
     }
 }

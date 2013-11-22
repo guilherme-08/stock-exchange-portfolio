@@ -12,7 +12,7 @@ namespace Common
     {
         public new void Add(StockPosition item)
         {
-            var existingStockPosition = this.SingleOrDefault(stockPosition => stockPosition.Name.Equals(item.Name));
+            var existingStockPosition = GetStockPosition(item.Name);
             if (existingStockPosition == null)
             {
                 base.Add(item);
@@ -22,6 +22,28 @@ namespace Common
                 existingStockPosition.NumberOfShares += item.NumberOfShares;
                 base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
             }
+        }
+        public new void Remove(StockPosition item)
+        {
+            var existingStockPosition = GetStockPosition(item.Name);
+            if (existingStockPosition == null)
+            {
+                base.Remove(item);
+            }
+            else
+            {
+                if (existingStockPosition.NumberOfShares == item.NumberOfShares)
+                {
+                    base.Remove(existingStockPosition);
+                }
+                existingStockPosition.NumberOfShares -= item.NumberOfShares;
+                base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+            }
+        }
+
+        public StockPosition GetStockPosition(string shortName)
+        {
+            return this.SingleOrDefault(stockPosition => stockPosition.Name.Equals(shortName));
         }
     }
 }

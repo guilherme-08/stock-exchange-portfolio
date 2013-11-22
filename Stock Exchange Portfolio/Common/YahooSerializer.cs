@@ -39,10 +39,11 @@ namespace Common
                     // Ignore first line and the last
                     dataLines = dataLines.Skip(1).Take(dataLines.Length - 2).ToArray();
 
-                    return dataLines.Aggregate(new YahooTable(), (table, line) => {
+                    return dataLines.Aggregate(new YahooTable(), (table, line) =>
+                    {
                         string[] lineValues = line.Split(',');
 
-                        table.Add(new YahooTableEntry()
+                        table.Insert(0, new YahooTableEntry()
                         {
                             DateString = lineValues[0],
                             Open = Double.Parse(lineValues[1], CultureInfo.InvariantCulture),
@@ -52,7 +53,7 @@ namespace Common
                             Volume = UInt32.Parse(lineValues[5]),
                             AdjustedClose = Double.Parse(lineValues[6], CultureInfo.InvariantCulture)
                         });
-                        return table; 
+                        return table;
                     });
                 }
                 default:

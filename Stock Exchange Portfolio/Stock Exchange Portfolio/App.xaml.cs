@@ -78,9 +78,8 @@ namespace Stock_Exchange_Portfolio
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 
-                IsolatedCommonSettings.AttachToCommonSettings();
             }
-
+            IsolatedCommonSettings.AttachToCommonSettings();
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -130,6 +129,11 @@ namespace Stock_Exchange_Portfolio
             {
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
+            }
+            else
+            {
+                MessageBox.Show(e.ExceptionObject.Message);
+                MessageBox.Show(e.ExceptionObject.StackTrace);
             }
         }
 
