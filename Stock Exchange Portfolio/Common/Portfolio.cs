@@ -10,8 +10,25 @@ namespace Common
 {
     public class Portfolio : ObservableCollection<StockPosition>
     {
+        public Portfolio(IEnumerable<StockPosition> collection)
+        {
+            foreach(var stockPostion in collection)
+            {
+                this.Add(stockPostion);
+            }
+        }
+
+        public Portfolio()
+        {
+        }
+
         public new void Add(StockPosition item)
         {
+            if (item == null)
+            {
+                base.Add(null);
+                return;
+            }
             var existingStockPosition = GetStockPosition(item.Name);
             if (existingStockPosition == null)
             {
@@ -35,6 +52,7 @@ namespace Common
                 if (existingStockPosition.NumberOfShares == item.NumberOfShares)
                 {
                     base.Remove(existingStockPosition);
+                    return;
                 }
                 existingStockPosition.NumberOfShares -= item.NumberOfShares;
                 base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));

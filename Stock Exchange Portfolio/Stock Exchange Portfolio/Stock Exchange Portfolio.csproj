@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PortfolioCategory.cs" />
     <Compile Include="ViewModels\StockInfoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBar\add.png" />
     <Content Include="Assets\AppBar\cancel.png" />
     <Content Include="Assets\AppBar\check.png" />
     <Content Include="Assets\AppBar\favs.addto.png" />
@@ -194,6 +196,7 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

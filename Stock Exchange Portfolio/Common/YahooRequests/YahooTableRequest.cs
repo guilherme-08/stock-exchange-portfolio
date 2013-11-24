@@ -28,16 +28,17 @@ namespace Common.YahooRequests
         {
             set
             {
-                this.InitialDay = value.Day - 1;
+                this.InitialDay = value.Day;
                 this.InitialMonth = value.Month - 1;
                 this.InitialYear = value.Year;
             }
         }
+
         public DateTime FinalDate
         {
             set
             {
-                this.FinalDay = value.Day - 1;
+                this.FinalDay = value.Day;
                 this.FinalMonth = value.Month - 1;
                 this.FinalYear = value.Year;
             }

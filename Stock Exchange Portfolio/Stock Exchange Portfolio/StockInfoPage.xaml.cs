@@ -29,7 +29,7 @@ namespace Stock_Exchange_Portfolio
 
         private async void StockInfoPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var yahooGoogRequest = new YahooTableRequest("GOOG");
+            var yahooGoogRequest = new YahooTableRequest(App.StockInfoViewModel.YahooQuote.ShortName);
             yahooGoogRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(stocksGraphsDates[0], 0, 0, 0));
             yahooGoogRequest.FinalDate = DateTime.Now;
 
@@ -60,7 +60,7 @@ namespace Stock_Exchange_Portfolio
             {
                 progressBar.IsIndeterminate = true;
                 progressBar.Visibility = System.Windows.Visibility.Visible;
-                var yahooGoogRequest = new YahooTableRequest("GOOG");
+                var yahooGoogRequest = new YahooTableRequest(App.StockInfoViewModel.YahooQuote.ShortName);
                 yahooGoogRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(stocksGraphsDates[index], 0, 0, 0));
                 yahooGoogRequest.FinalDate = DateTime.Now;
 

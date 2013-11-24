@@ -130,11 +130,8 @@ namespace Stock_Exchange_Portfolio
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
-            else
-            {
-                MessageBox.Show(e.ExceptionObject.Message);
-                MessageBox.Show(e.ExceptionObject.StackTrace);
-            }
+            MessageBox.Show(e.ExceptionObject.Message);
+            MessageBox.Show(e.ExceptionObject.StackTrace);
         }
 
         #region Phone application initialization
@@ -243,7 +240,7 @@ namespace Stock_Exchange_Portfolio
             catch
             {
                 // If an exception is caught here it is most likely due to either
-                // ResourceLangauge not being correctly set to a supported language
+                // ResourceLanguage not being correctly set to a supported language
                 // code or ResourceFlowDirection is set to a value other than LeftToRight
                 // or RightToLeft.
 

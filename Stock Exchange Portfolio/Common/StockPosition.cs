@@ -49,7 +49,58 @@ namespace Common
             }
         }
 
-        public bool Equals(object x, object y)
+        private double? stockCloseYesterday;
+
+        public double? StockCloseYesterday
+        {
+            get
+            {
+                return stockCloseYesterday;
+            }
+            set
+            {
+                if (value != stockCloseYesterday)
+                {
+                    stockCloseYesterday = value;
+                    NotifyPropertyChanged("StockCloseYesterday");
+                    NotifyPropertyChanged("Variation");
+                }
+            }
+        }
+
+        private double stockValueNow;
+
+        public double StockValueNow
+        {
+            get
+            {
+                return stockValueNow;
+            }
+            set
+            {
+                if (value != stockValueNow)
+                {
+                    stockValueNow = value;
+                    NotifyPropertyChanged("StockValueNow");
+                    NotifyPropertyChanged("Variation");
+                }
+            }
+        }
+
+        public double? Variation
+        {
+            get
+            {
+                if (stockCloseYesterday.HasValue == false)
+                {
+                    return null;
+                }
+
+                return (stockValueNow / stockCloseYesterday.Value - 1.0d) * 100.0d;
+            }
+        }
+
+        public new bool Equals(object x, object y)
         {
             if (x is StockPosition == false || y is StockPosition == false)
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.YahooRequests;
+using Common.YahooResponses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,5 +53,21 @@ namespace Common
             }
         }
 
+        public static async void GetStockVariation(StockPosition stockPosition)
+        {
+            if (stockPosition.StockCloseYesterday == null)
+            {
+                var yahooRequest = new YahooTableRequest(stockPosition.Name);
+                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)); // -2 days because sunday
+                yahooRequest.Periodicity = YahooTableRequest.PeriodicityTypes.Daily;
+
+                var yahooTable = await GetAsync<YahooTable>(Actions.GetTable, yahooRequest.ToString());
+
+                stockPosition.StockCloseYesterday = (yahooTable.Last() ?? new YahooTableEntry()).Close;
+            }
+            var yahooQuote = await GetAsync<YahooQuote>(Actions.GetQuote, stockPosition.Name);
+
+            stockPosition.StockValueNow = yahooQuote.Value;
+        }
     }
 }

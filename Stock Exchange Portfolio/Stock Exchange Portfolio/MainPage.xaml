@@ -24,40 +24,23 @@
             <Setter Property="GridStroke" Value="DarkGray" />
         </Style>
     </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="button" Click="ApplicationBarIconButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <phone:PhoneApplicationPage.DataContext>
         <localvm:MainViewModel />
     </phone:PhoneApplicationPage.DataContext>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-         <!--Panorama control-->
         <phone:Panorama Title="my application">
+            
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="/Stock_Exchange_Portfolio;component/Assets/PanoramaBackground.png"/>
             </phone:Panorama.Background>
 
-            <!--Panorama item one-->
             <phone:PanoramaItem Header="portfolio">
                 <StackPanel>
                     <amq:SerialChart
@@ -69,11 +52,27 @@
                             <amq:AreaGraph ValueMemberPath="Value" Title="Test Chart" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
-                    <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}" Tap="LongListSelector_Tap">
+                    <phone:LongListSelector
+                        x:Name="portfolioListGainers"
+                        Margin="0,0,-22,0"
+                        IsGroupingEnabled="True" LayoutMode="List" HideEmptyGroups="False"
+                        ItemsSource="{Binding PortfoliosCategorized}"
+                        Tap="LongListSelector_Tap">
+                        <phone:LongListSelector.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Foreground="{StaticResource PhoneAccentBrush}"
+                                    Text="{Binding Name}"
+                                    FontSize="32"/>
+                            </DataTemplate>
+                        </phone:LongListSelector.GroupHeaderTemplate>
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,-6,0,12">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                <StackPanel Margin="0,-6,0,12" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                    <TextBlock
+                                        Text="{Binding Variation}"
+                                        TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
@@ -81,9 +80,7 @@
                 </StackPanel>
             </phone:PanoramaItem>
 
-            <!--Panorama item two-->
             <phone:PanoramaItem>
-                <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
                 <phone:LongListSelector Margin="0,-38,-22,2" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
@@ -92,7 +89,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="second item"
+                                <TextBlock Text="watchlist"
                                            Style="{StaticResource PanoramaItemHeaderTextStyle}"
                                            Grid.Row="0"/>
                             </Grid>
@@ -113,9 +110,7 @@
                 </phone:LongListSelector>
             </phone:PanoramaItem>
 
-            <!--Panorama item three-->
             <phone:PanoramaItem Header="third item" Orientation="Horizontal">
-                <!--Double wide Panorama with large image placeholders-->
                 <Grid>
                     <StackPanel Margin="0,4,16,0" Orientation="Vertical" VerticalAlignment="Top">
                         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
