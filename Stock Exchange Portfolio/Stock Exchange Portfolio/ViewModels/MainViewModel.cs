@@ -51,12 +51,11 @@ namespace Stock_Exchange_Portfolio.ViewModels
             this.Items.Add(new ItemViewModel() { LineOne = "runtime five", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus habitant inceptos interdum lobortis nascetur" });
             this.Items.Add(new ItemViewModel() { LineOne = "runtime six", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent ultrices vehicula volutpat maecenas praesent" });
 
-            portfolioGainers.Add(new StockPosition() { Name = "GOOG" });
-            portfolioLosers.Add(new StockPosition() { Name = "AAPL" });
-
             PortfoliosCategorized = new ObservableCollection<PortfolioCategory>();
             PortfoliosCategorized.Add(portfolioGainers);
             PortfoliosCategorized.Add(portfolioLosers);
+
+            PortfolioChanged(this.Portfolio, null);
             this.IsDataLoaded = true;
         }
 

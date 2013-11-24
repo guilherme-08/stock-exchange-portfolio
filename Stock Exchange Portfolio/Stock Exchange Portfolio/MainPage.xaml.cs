@@ -30,12 +30,15 @@ namespace Stock_Exchange_Portfolio
             {
                 App.ViewModel.LoadData();
             }
-            App.ViewModel.Portfolio.ToList().ForEach(API.GetStockVariation);
+            foreach (var stockPosition in App.ViewModel.Portfolio)
+            {
+                API.GetStockVariation(stockPosition);
+            }
         }
 
         private async void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var stockPosition = (sender as LongListSelector).SelectedItem as StockPosition;
+            var stockPosition = (StockPosition)((LongListSelector)sender).SelectedItem;
 
             App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
             App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, stockPosition.Name);

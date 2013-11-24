@@ -63,7 +63,6 @@ namespace Common
                 {
                     stockCloseYesterday = value;
                     NotifyPropertyChanged("StockCloseYesterday");
-                    NotifyPropertyChanged("Variation");
                 }
             }
         }
@@ -115,6 +114,7 @@ namespace Common
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

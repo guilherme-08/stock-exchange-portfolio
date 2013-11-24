@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Common
 {
-    public class Portfolio : ObservableCollection<StockPosition>
+    public class Portfolio : ObservableCollection<StockPosition>, INotifyPropertyChanged
     {
         public Portfolio(IEnumerable<StockPosition> collection)
         {
@@ -16,10 +17,19 @@ namespace Common
             {
                 this.Add(stockPostion);
             }
+            base.PropertyChanged += OnPropertyChanged;
         }
 
         public Portfolio()
         {
+            base.PropertyChanged += OnPropertyChanged;
+        }
+
+        public event PropertyChangedEventHandler PortfolioPropertyChanged;
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, sender));
         }
 
         public new void Add(StockPosition item)
@@ -32,6 +42,7 @@ namespace Common
             var existingStockPosition = GetStockPosition(item.Name);
             if (existingStockPosition == null)
             {
+                item.PropertyChanged += OnPropertyChanged;
                 base.Add(item);
             }
             else
@@ -51,6 +62,7 @@ namespace Common
             {
                 if (existingStockPosition.NumberOfShares == item.NumberOfShares)
                 {
+                    existingStockPosition.PropertyChanged -= OnPropertyChanged;
                     base.Remove(existingStockPosition);
                     return;
                 }
