@@ -48,10 +48,12 @@
             <TextBlock
                 Text="STOCK INFO"
                 Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock
-                Text="{Binding Name}"
-                Margin="9,-7,0,0"
-                Style="{StaticResource PhoneTextTitle1Style}"/>
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
+                <TextBlock
+                    Text="{Binding Name}"
+                    Margin="9,-7,0,0"
+                    Style="{StaticResource PhoneTextTitle1Style}"/>
+            </ScrollViewer>
             <TextBlock
                 Margin="12,-7,0,0"
                     Text="{Binding ShortName}"
@@ -141,7 +143,9 @@
                                 DataSource="{Binding YahooTables[0]}" 
                                 CategoryValueMemberPath="DateString" Height="173">
                                 <amq:SerialChart.Graphs>
-                                    <amq:AreaGraph ValueMemberPath="Close" Title="{Binding YahooQuote.ShortName}" Brush="{StaticResource PhoneAccentBrush}" />
+                                    <amq:AreaGraph ValueMemberPath="Close"
+                                                   Title="{Binding YahooQuote.ShortName}"
+                                                   Brush="{StaticResource PhoneAccentBrush}" />
                                 </amq:SerialChart.Graphs>
                             </amq:SerialChart>
                         </phone:PivotItem>

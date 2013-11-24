@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Common
 {
@@ -24,7 +25,7 @@ namespace Common
             {
                 case "YahooQuote":
                 {
-                    string[] dataValues = data.Split(',');
+                    var dataValues = Csv.ReadValues(data);
                     var resultYahooQuote = new YahooQuote();
                     resultYahooQuote.Name = dataValues[0].Trim('"');
                     resultYahooQuote.ShortName = dataValues[1].Trim('"');
@@ -43,7 +44,7 @@ namespace Common
 
                     return dataLines.Aggregate(new YahooTable(), (table, line) =>
                     {
-                        string[] lineValues = line.Split(',');
+                        var lineValues = Csv.ReadValues(line);
 
                         table.Insert(0, new YahooTableEntry()
                         {

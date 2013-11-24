@@ -35,7 +35,7 @@
     </phone:PhoneApplicationPage.DataContext>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Panorama Title="my application">
+        <phone:Panorama Title="stock exchange portfolio">
             
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="/Stock_Exchange_Portfolio;component/Assets/PanoramaBackground.png"/>
@@ -45,11 +45,14 @@
                 <StackPanel>
                     <amq:SerialChart
                         Name="pie1"
-                        Style="{StaticResource chartStyle}" 
-                             DataSource="{Binding Charts[2].Items}" 
-                             CategoryValueMemberPath="Month" Height="173">
+                        Style="{StaticResource chartStyle}"
+                        DataSource="{Binding Charts[2].Items}" 
+                        CategoryValueMemberPath="Month" Height="173">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Title="Test Chart" />
+                            <amq:AreaGraph
+                                ValueMemberPath="Value"
+                                Brush="{StaticResource PhoneAccentBrush}"
+                                Title="Portfolio Value" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
                     <phone:LongListSelector
