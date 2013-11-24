@@ -19,6 +19,12 @@ namespace Stock_Exchange_Portfolio
             InitializeComponent();
 
             DataContext = App.SearchViewModel;
+            Loaded += PageLoaded;
+        }
+
+        protected void PageLoaded(object sender, RoutedEventArgs args)
+        {
+            tbSearch.Focus();
         }
 
         private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
@@ -48,6 +54,7 @@ namespace Stock_Exchange_Portfolio
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             NavigationService.RemoveBackEntry();
+            App.SearchViewModel.SearchString = string.Empty;
         }
     }
 }
