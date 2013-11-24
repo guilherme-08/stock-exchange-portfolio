@@ -38,7 +38,7 @@ namespace Stock_Exchange_Portfolio
 
         private async void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var stockPosition = (StockPosition)((LongListSelector)sender).SelectedItem;
+            var stockPosition = (StockPosition)((FrameworkElement)sender).DataContext;
 
             App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
             App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, stockPosition.Name);

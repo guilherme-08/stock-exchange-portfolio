@@ -56,8 +56,7 @@
                         x:Name="portfolioListGainers"
                         Margin="0,0,-22,0"
                         IsGroupingEnabled="True" LayoutMode="List" HideEmptyGroups="False"
-                        ItemsSource="{Binding PortfoliosCategorized}"
-                        Tap="LongListSelector_Tap">
+                        ItemsSource="{Binding PortfoliosCategorized}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>
                                 <TextBlock
@@ -68,7 +67,7 @@
                         </phone:LongListSelector.GroupHeaderTemplate>
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,-6,0,12" Orientation="Horizontal">
+                                <StackPanel Margin="0,-6,0,12" Orientation="Horizontal" Tap="LongListSelector_Tap">
                                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                                     <TextBlock
                                         Text="{Binding Variation}"
