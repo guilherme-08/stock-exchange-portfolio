@@ -45,6 +45,7 @@
     <Compile Include="StockPosition.cs" />
     <Compile Include="YahooRequests\YahooTableRequest.cs" />
     <Compile Include="YahooResponses\YahooQuote.cs" />
+    <Compile Include="YahooResponses\YahooSearch.cs" />
     <Compile Include="YahooResponses\YahooTable.cs" />
     <Compile Include="YahooResponses\YahooTableEntry.cs" />
     <Compile Include="YahooSerializer.cs" />

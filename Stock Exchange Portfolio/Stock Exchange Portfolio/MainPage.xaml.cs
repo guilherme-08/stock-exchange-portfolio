@@ -45,10 +45,10 @@ namespace Stock_Exchange_Portfolio
 
         private async void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
-            App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, "AAPL");
-            App.StockInfoViewModel.YahooQuote.ShortName = "AAPL";
-            NavigationService.Navigate(new Uri("/StockInfoPage.xaml", UriKind.Relative));
+            //App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
+            //App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, "AAPL");
+            //App.StockInfoViewModel.YahooQuote.ShortName = "AAPL";
+            NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
     }
 }

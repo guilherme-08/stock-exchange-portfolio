@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 
 namespace Common
@@ -55,6 +57,15 @@ namespace Common
                         });
                         return table;
                     });
+                }
+                case "YahooSearch":
+                {
+                    int jsonStart = data.IndexOf('(') + 1;
+                    int jsonEnd = data.Length - 1;
+                    string json = data.Substring(jsonStart, jsonEnd - jsonStart);
+
+                    DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(type);
+                    return jsonSerializer.ReadObject(new MemoryStream(Encoding.Unicode.GetBytes(json)));
                 }
                 default:
                     return null;

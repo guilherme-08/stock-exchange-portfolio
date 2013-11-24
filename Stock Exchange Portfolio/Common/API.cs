@@ -16,7 +16,8 @@ namespace Common
         public enum Actions
         {
             GetQuote,
-            GetTable
+            GetTable,
+            Search
         }
 
         private static Uri getUrlFromAction(Actions action, params string[] parameters)
@@ -27,8 +28,11 @@ namespace Common
                     return new Uri(string.Format("http://finance.yahoo.com/d/quotes?f=nsl1d1t1v&s={0}", parameters));
                 case Actions.GetTable:
                     return new Uri(string.Format("http://ichart.finance.yahoo.com/table.txt?{0}", parameters));
+                case Actions.Search:
+                    return new Uri(string.Format("http://d.yimg.com/autoc.finance.yahoo.com/autoc?query={0}&callback=YAHOO.Finance.SymbolSuggest.ssCallback", parameters));
+                default:
+                    throw new NotSupportedException("Unkown API.Actions.");
             }
-            return null;
         }
 
         public static async Task<T> GetAsync<T>(Actions action, params string[] parameters)

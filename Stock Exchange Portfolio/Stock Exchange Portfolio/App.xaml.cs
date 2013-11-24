@@ -36,6 +36,9 @@ namespace Stock_Exchange_Portfolio
 
         public static StockInfoViewModel StockInfoViewModel = null;
 
+        public static SearchViewModel SearchViewModel = new SearchViewModel();
+
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -252,5 +255,6 @@ namespace Stock_Exchange_Portfolio
                 throw;
             }
         }
+
     }
 }
