@@ -62,7 +62,7 @@ namespace Common
             if (stockPosition.StockCloseYesterday == null)
             {
                 var yahooRequest = new YahooTableRequest(stockPosition.Name);
-                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)); // -2 days because sunday
+                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(3, 0, 0, 0)); // -3 days because weekend
                 yahooRequest.Periodicity = YahooTableRequest.PeriodicityTypes.Daily;
 
                 var yahooTable = await GetAsync<YahooTable>(Actions.GetTable, yahooRequest.ToString());
