@@ -21,7 +21,7 @@ namespace Common.YahooResponses
         {
             get
             {
-                return DateTime.ParseExact(DateString, "d", CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(DateString, "M/d/yyyy", CultureInfo.InvariantCulture);
             }
         }
 
