@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Common;
 using System.Collections;
+using Common.YahooResponses;
+using System.Windows;
 
 namespace Stock_Exchange_Portfolio.ViewModels
 {
@@ -16,8 +18,16 @@ namespace Stock_Exchange_Portfolio.ViewModels
             this.Items = new ObservableCollection<ItemViewModel>();
             this.Portfolio = Settings.Portfolio;
             this.Portfolio.CollectionChanged += PortfolioChanged;
+            this.Portfolio.NumberOfSharesChanged += NumberOfSharesChanged;
             portfolioGainers = new PortfolioCategory() { Name = "gainers" };
             portfolioLosers = new PortfolioCategory() { Name = "losers" };
+        }
+
+        public bool IsDataUpdated { get; set; }
+
+        private void NumberOfSharesChanged(uint numberOfShares)
+        {
+            IsDataUpdated = false;
         }
 
         private void PortfolioChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -56,7 +66,23 @@ namespace Stock_Exchange_Portfolio.ViewModels
             PortfoliosCategorized.Add(portfolioLosers);
 
             PortfolioChanged(this.Portfolio, null);
-            this.IsDataLoaded = true;
+            UpdateData();
+            IsDataUpdated = IsDataLoaded = true;
+        }
+
+        public async void UpdateData()
+        {
+            if (IsDataUpdated == true)
+            {
+                return;
+            }
+            var portfolioValue = await API.GetPortfolioValue(this.Portfolio, 30);
+            Deployment.Current.Dispatcher.BeginInvoke(delegate
+            {
+                PortfolioValue = portfolioValue;
+                NotifyPropertyChanged("PortfolioValue");
+                this.IsDataUpdated = true;
+            });
         }
 
         private PortfolioCategory portfolioGainers;
@@ -66,6 +92,8 @@ namespace Stock_Exchange_Portfolio.ViewModels
         public ObservableCollection<PortfolioCategory> PortfoliosCategorized { get; set; }
 
         public Portfolio Portfolio { get; set; }
+
+        public YahooTable PortfolioValue { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

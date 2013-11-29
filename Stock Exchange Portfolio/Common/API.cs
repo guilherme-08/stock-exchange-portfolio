@@ -40,13 +40,14 @@ namespace Common
             Uri uri = getUrlFromAction(action, parameters);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.CreateHttp(uri);
-            //HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
             request.AllowReadStreamBuffering = true;
-            var task = Task<WebResponse>.Factory.FromAsync(
-                new Func<AsyncCallback, object, IAsyncResult>(request.BeginGetResponse),
-                new Func<IAsyncResult, WebResponse>(request.EndGetResponse), null);
-            var response = await task;
+            
+            //var task = Task<WebResponse>.Factory.FromAsync(
+            //    new Func<AsyncCallback, object, IAsyncResult>(request.BeginGetResponse),
+            //    new Func<IAsyncResult, WebResponse>(request.EndGetResponse), TaskCreationOptions.HideScheduler);
+            //var response = await task;
 
+            var response = await request.GetResponseAsync();
             using (Stream streamResponse = response.GetResponseStream())
             using (StreamReader streamRead = new StreamReader(streamResponse, Encoding.UTF8))
             {
@@ -59,19 +60,63 @@ namespace Common
 
         public static async void GetStockVariation(StockPosition stockPosition)
         {
+            var yahooQuote = await GetAsync<YahooQuote>(Actions.GetQuote, stockPosition.Name);
+
+            stockPosition.StockValueNow = yahooQuote.Value;
             if (stockPosition.StockCloseYesterday == null)
             {
                 var yahooRequest = new YahooTableRequest(stockPosition.Name);
-                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(3, 0, 0, 0)); // -3 days because weekend
+                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0)); // -4 days because weekend
                 yahooRequest.Periodicity = YahooTableRequest.PeriodicityTypes.Daily;
 
                 var yahooTable = await GetAsync<YahooTable>(Actions.GetTable, yahooRequest.ToString());
 
-                stockPosition.StockCloseYesterday = (yahooTable.Last() ?? new YahooTableEntry()).Close;
+                var lastDay = yahooTable.Last();
+                if (stockPosition.StockValueNow == 0 || yahooQuote.Date.Equals(lastDay.Date))
+                {
+                    stockPosition.StockCloseYesterday = (yahooTable[yahooTable.Count - 2] ?? new YahooTableEntry()).Close;
+                }
+                else
+                {
+                    stockPosition.StockCloseYesterday = (lastDay ?? new YahooTableEntry()).Close;
+                }
             }
-            var yahooQuote = await GetAsync<YahooQuote>(Actions.GetQuote, stockPosition.Name);
+        }
 
-            stockPosition.StockValueNow = yahooQuote.Value;
+        public static async Task<YahooTable> GetPortfolioValue(Portfolio portfolio, int numberOfDays)
+        {
+            if (portfolio.Count == 0 || numberOfDays < 0)
+            {
+                return null;
+            }
+            uint totalOfShares = portfolio.Aggregate(0u, (shares, stockPosition) =>
+            {
+                return shares + stockPosition.NumberOfShares;
+            });
+
+            var portfolioYahooTables = new List<YahooTable>();
+            foreach (var stockPosition in portfolio)
+            {
+                var yahooRequest = new YahooTableRequest(stockPosition.Name);
+                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(numberOfDays, 0, 0, 0)); // todo: consider weekends
+                yahooRequest.Periodicity = YahooTableRequest.PeriodicityTypes.Daily;
+
+                portfolioYahooTables.Add(await GetAsync<YahooTable>(Actions.GetTable, yahooRequest.ToString()));
+            }
+            var portfolioValue = new YahooTable();
+
+            // Add an entry for the number of days
+            portfolioValue.AddRange(Enumerable.Repeat(0, portfolioYahooTables[0].Count).Select(_ => new YahooTableEntry()).ToList());
+            for (int i = 0; i < portfolioYahooTables[0].Count; ++i)
+            {
+                portfolioValue[i].DateString = portfolioYahooTables[0][i].DateString;
+                for (int j = 0; j < portfolioYahooTables.Count; ++j)
+                {
+                    var yahooTable = portfolioYahooTables[j];
+                    portfolioValue[i].Close += yahooTable[i].Close * portfolio[j].NumberOfShares;
+                }
+            }
+            return portfolioValue;
         }
     }
 }

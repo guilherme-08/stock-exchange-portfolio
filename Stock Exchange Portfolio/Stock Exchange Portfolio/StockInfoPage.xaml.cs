@@ -23,19 +23,6 @@ namespace Stock_Exchange_Portfolio
             InitializeComponent();
 
             DataContext = App.StockInfoViewModel;
-
-            Loaded += StockInfoPage_Loaded;
-        }
-
-        private async void StockInfoPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            var yahooGoogRequest = new YahooTableRequest(App.StockInfoViewModel.YahooQuote.ShortName);
-            yahooGoogRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(stocksGraphsDates[0], 0, 0, 0));
-            yahooGoogRequest.FinalDate = DateTime.Now;
-
-            App.StockInfoViewModel.YahooTables[0] = await API.GetAsync<YahooTable>(API.Actions.GetTable, yahooGoogRequest.ToString());
-            progressBar.IsIndeterminate = false;
-            progressBar.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -64,7 +51,8 @@ namespace Stock_Exchange_Portfolio
                 yahooGoogRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(stocksGraphsDates[index], 0, 0, 0));
                 yahooGoogRequest.FinalDate = DateTime.Now;
 
-                App.StockInfoViewModel.YahooTables[index] = await API.GetAsync<YahooTable>(API.Actions.GetTable, yahooGoogRequest.ToString());
+                var taskResult = API.GetAsync<YahooTable>(API.Actions.GetTable, yahooGoogRequest.ToString());
+                App.StockInfoViewModel.YahooTables[index] = await taskResult;
                 progressBar.IsIndeterminate = false;
                 progressBar.Visibility = System.Windows.Visibility.Collapsed;
             }

@@ -38,7 +38,7 @@ namespace Common
             catch (ArgumentException ex)
             {
                 // Syntax error in the regular expression
-                throw ex;
+                throw;
             }
         }
 

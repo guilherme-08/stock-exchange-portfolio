@@ -26,13 +26,9 @@
     </phone:PhoneApplicationPage.Resources>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="button" Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="search" Click="ApplicationBarIconButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-
-    <phone:PhoneApplicationPage.DataContext>
-        <localvm:MainViewModel />
-    </phone:PhoneApplicationPage.DataContext>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Panorama Title="stock exchange portfolio">
@@ -42,35 +38,45 @@
             </phone:Panorama.Background>
 
             <phone:PanoramaItem Header="portfolio">
-                <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <amq:SerialChart
+                        Grid.Row="0"
                         Name="pie1"
                         Style="{StaticResource chartStyle}"
-                        DataSource="{Binding Charts[2].Items}" 
-                        CategoryValueMemberPath="Month" Height="173">
+                        DataSource="{Binding PortfolioValue}" 
+                        CategoryValueMemberPath="DateString" Height="160">
                         <amq:SerialChart.Graphs>
                             <amq:AreaGraph
-                                ValueMemberPath="Value"
+                                ValueMemberPath="Close"
                                 Brush="{StaticResource PhoneAccentBrush}"
                                 Title="Portfolio Value" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
                     <phone:LongListSelector
+                        Grid.Row="1"
                         x:Name="portfolioListGainers"
                         Margin="0,0,-22,0"
                         IsGroupingEnabled="True" LayoutMode="List" HideEmptyGroups="False"
                         ItemsSource="{Binding PortfoliosCategorized}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    Foreground="{StaticResource PhoneAccentBrush}"
-                                    Text="{Binding Name}"
-                                    FontSize="32"/>
+                                <StackPanel>
+                                    <TextBlock
+                                        Foreground="{StaticResource PhoneAccentBrush}"
+                                        Text="{Binding Name}"
+                                        FontSize="32"/>
+                                </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.GroupHeaderTemplate>
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,-6,0,12" Orientation="Horizontal" Tap="LongListSelector_Tap">
+                                <StackPanel
+                                    toolkit:TiltEffect.IsTiltEnabled="True"
+                                    Margin="0,-6,0,12" Orientation="Horizontal" Tap="LongListSelector_Tap">
                                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                                     <TextBlock
                                         Text="{Binding Variation}"
@@ -79,7 +85,7 @@
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
                     </phone:LongListSelector>
-                </StackPanel>
+                </Grid>
             </phone:PanoramaItem>
 
             <phone:PanoramaItem>

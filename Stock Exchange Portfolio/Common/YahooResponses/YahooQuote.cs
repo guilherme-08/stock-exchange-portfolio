@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,14 @@ namespace Common.YahooResponses
         public Double Value { get; set; }
 
         public String DateString { get; set; }
+
+        public DateTime Date
+        {
+            get
+            {
+                return DateTime.ParseExact(DateString, "d", CultureInfo.InvariantCulture);
+            }
+        }
 
         public String Time { get; set; }
 

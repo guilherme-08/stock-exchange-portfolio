@@ -63,6 +63,7 @@ namespace Common
                 {
                     stockCloseYesterday = value;
                     NotifyPropertyChanged("StockCloseYesterday");
+                    NotifyPropertyChanged("Variation");
                 }
             }
         }
