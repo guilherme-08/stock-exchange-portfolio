@@ -165,9 +165,6 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Stock_Exchange_Portfolio_2013_11_28_19_00_46.sap" />
-    <None Include="Stock_Exchange_Portfolio_2013_11_28_19_10_37.sap" />
-    <None Include="Stock_Exchange_Portfolio_2013_11_28_19_15_32.sap" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AppBar\add.png" />
