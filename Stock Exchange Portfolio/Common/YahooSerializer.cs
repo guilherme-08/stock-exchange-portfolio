@@ -66,7 +66,10 @@ namespace Common
                     string json = data.Substring(jsonStart, jsonEnd - jsonStart);
 
                     DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(type);
-                    return jsonSerializer.ReadObject(new MemoryStream(Encoding.Unicode.GetBytes(json)));
+                    var searchResult = (YahooSearch) jsonSerializer.ReadObject(new MemoryStream(Encoding.Unicode.GetBytes(json)));
+
+                    searchResult.ResultSet.Result = searchResult.ResultSet.Result.Where(_ => _.typeDisp == "Equity").ToArray();
+                    return searchResult;
                 }
                 default:
                     return null;
