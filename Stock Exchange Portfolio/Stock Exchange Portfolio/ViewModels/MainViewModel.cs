@@ -20,6 +20,8 @@ namespace Stock_Exchange_Portfolio.ViewModels
             this.Portfolio = Settings.Portfolio;
             this.Portfolio.CollectionChanged += PortfolioChanged;
             this.Portfolio.NumberOfSharesChanged += NumberOfSharesChanged;
+            this.WatchList = Settings.WatchList;
+            this.WatchList.CollectionChanged += WatchListChanged;
             portfolioGainers = new PortfolioCategory() { Name = "gainers" };
             portfolioLosers = new PortfolioCategory() { Name = "losers" };
         }
@@ -46,6 +48,11 @@ namespace Stock_Exchange_Portfolio.ViewModels
             {
                 App.ViewModel.portfolioLosers.Add(loser);
             }
+        }
+
+        private void WatchListChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // TODO
         }
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
@@ -94,6 +101,8 @@ namespace Stock_Exchange_Portfolio.ViewModels
         public ObservableCollection<PortfolioCategory> PortfoliosCategorized { get; set; }
 
         public Portfolio Portfolio { get; set; }
+
+        public Portfolio WatchList { get; set; }
 
         public YahooTable PortfolioValue { get; set; }
 

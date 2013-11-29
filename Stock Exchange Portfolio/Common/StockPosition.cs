@@ -100,6 +100,18 @@ namespace Common
             }
         }
 
+        public string VariationString
+        {
+            get
+            {
+                return "+13.45%";
+            }
+            set
+            {
+
+            }
+        }
+
         public new bool Equals(object x, object y)
         {
             if (x is StockPosition == false || y is StockPosition == false)

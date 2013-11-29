@@ -19,8 +19,8 @@
 
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="chartStyle" TargetType="amq:SerialChart">
-            <Setter Property="AxisForeground" Value="White" />
-            <Setter Property="PlotAreaBackground" Value="Black" />
+            <Setter Property="AxisForeground" Value="{StaticResource PhoneContrastBackgroundBrush}" />
+            <Setter Property="PlotAreaBackground" Value="{StaticResource PhoneBackgroundBrush}" />
             <Setter Property="GridStroke" Value="DarkGray" />
         </Style>
     </phone:PhoneApplicationPage.Resources>
@@ -31,9 +31,17 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="add to portfolio" Click="AddToPortfolio"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.addto.png" Text="add to watchlist"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="pin to sart"/>
+            <shell:ApplicationBarIconButton
+                IconUri="/Toolkit.Content/ApplicationBar.Add.png"
+                Text="add to portfolio"
+                Click="AddToPortfolio"/>
+            <shell:ApplicationBarIconButton
+                IconUri="/Assets/AppBar/favs.addto.png"
+                Text="add"
+                Click="OnWatchListClick"/>
+            <shell:ApplicationBarIconButton
+                IconUri="/Assets/AppBar/save.png"
+                Text="pin to sart"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

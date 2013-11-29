@@ -16,7 +16,17 @@ namespace Stock_Exchange_Portfolio
 {
     public partial class StockInfoPage : PhoneApplicationPage
     {
+        private static readonly Uri AssetAddFavorite = new Uri("Assets/AppBar/favs.addto.png", UriKind.Relative);
+
+        private static readonly Uri AssetRemoveFavorite = new Uri("Assets/AppBar/favs.png", UriKind.Relative);
+
+        private const string AddText = "add";
+
+        private const string RemoveText = "remove";
+
         private static readonly int[] stocksGraphsDates = new int[] { 5, 15, 30, 60, 120, 360 };
+
+        ApplicationBarIconButton AppBarFavoriteIconButton;
 
         public StockInfoPage()
         {
@@ -37,6 +47,16 @@ namespace Stock_Exchange_Portfolio
             else if (App.StockInfoViewModel.Stocks == 0 && ApplicationBar.Buttons.Count == 4)
             {
                 ApplicationBar.Buttons.RemoveAt(1);
+            }
+
+            AppBarFavoriteIconButton = (ApplicationBarIconButton)ApplicationBar.Buttons[ApplicationBar.Buttons.Count - 2];
+            if (Settings.WatchList.Any(stock => stock.Name == App.StockInfoViewModel.YahooQuote.ShortName))
+            {
+                AppBarFavoriteIconButton.IconUri = AssetRemoveFavorite;
+            }
+            else
+            {
+                AppBarFavoriteIconButton.IconUri = AssetAddFavorite;
             }
         }
 
@@ -61,6 +81,28 @@ namespace Stock_Exchange_Portfolio
         private void AddToPortfolio(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AddPositionPage.xaml", UriKind.Relative));
+        }
+
+        private void OnWatchListClick(object sender, EventArgs e)
+        {
+            var stock = new StockPosition()
+            {
+                Name = App.StockInfoViewModel.YahooQuote.ShortName,
+                NumberOfShares = 0,
+                StockValueNow = App.StockInfoViewModel.YahooQuote.Value
+            };
+            if (AppBarFavoriteIconButton.IconUri == AssetRemoveFavorite)
+            {
+                Settings.WatchList.Remove(stock);
+                AppBarFavoriteIconButton.IconUri = AssetAddFavorite;
+                AppBarFavoriteIconButton.Text = AddText;
+            }
+            else
+            {
+                Settings.WatchList.Add(stock);
+                AppBarFavoriteIconButton.IconUri = AssetRemoveFavorite;
+                AppBarFavoriteIconButton.Text = RemoveText;
+            }
         }
 
         private void OnSellButtonClick(object sender, EventArgs e)

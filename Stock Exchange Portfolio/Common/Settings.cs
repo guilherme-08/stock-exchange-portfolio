@@ -42,5 +42,34 @@ namespace Common
             }
         }
 
+        private static Portfolio watchList = null;
+
+        public static Portfolio WatchList
+        {
+            get
+            {
+                if (watchList == null)
+                {
+                    if (StorageSettings.Contains("WatchList"))
+                    {
+                        watchList = (Portfolio)StorageSettings["WatchList"];
+                        watchList.CollectionChanged += (sender, args) =>
+                        {
+                            StorageSettings.Save();
+                        };
+                    }
+                    else
+                    {
+                        watchList = new Portfolio();
+                        StorageSettings.Add("WatchList", watchList);
+                        watchList.CollectionChanged += (sender, args) =>
+                        {
+                            StorageSettings.Save();
+                        };
+                    }
+                }
+                return watchList;
+            }
+        }
     }
 }

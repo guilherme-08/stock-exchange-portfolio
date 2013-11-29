@@ -52,7 +52,7 @@ namespace Stock_Exchange_Portfolio
             });
         }
 
-        private async void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private async void OnStockPositionTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var stockPosition = (StockPosition)((FrameworkElement)sender).DataContext;
             
@@ -62,11 +62,8 @@ namespace Stock_Exchange_Portfolio
             NavigationService.Navigate(new Uri("/StockInfoPage.xaml", UriKind.Relative));
         }
 
-        private async void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            //App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
-            //App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, "AAPL");
-            //App.StockInfoViewModel.YahooQuote.ShortName = "AAPL";
             NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
     }

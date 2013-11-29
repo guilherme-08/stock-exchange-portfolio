@@ -171,6 +171,7 @@
     <Content Include="Assets\AppBar\cancel.png" />
     <Content Include="Assets\AppBar\check.png" />
     <Content Include="Assets\AppBar\favs.addto.png" />
+    <Content Include="Assets\AppBar\favs.png" />
     <Content Include="Assets\AppBar\feature.search.png" />
     <Content Include="Assets\AppBar\minus.png" />
     <Content Include="Assets\AppBar\save.png" />

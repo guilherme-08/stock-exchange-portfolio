@@ -19,8 +19,8 @@
 
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="chartStyle" TargetType="amq:SerialChart">
-            <Setter Property="AxisForeground" Value="White" />
-            <Setter Property="PlotAreaBackground" Value="Black" />
+            <Setter Property="AxisForeground" Value="{StaticResource PhoneContrastBackgroundBrush}" />
+            <Setter Property="PlotAreaBackground" Value="{StaticResource PhoneBackgroundBrush}" />
             <Setter Property="GridStroke" Value="DarkGray" />
         </Style>
     </phone:PhoneApplicationPage.Resources>
@@ -33,10 +33,6 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Panorama Title="stock exchange portfolio">
             
-            <!--phone:Panorama.Background>
-                <ImageBrush ImageSource="/Stock_Exchange_Portfolio;component/Assets/PanoramaBackground.png"/>
-            </-->
-
             <phone:PanoramaItem Header="portfolio">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -85,7 +81,8 @@
                             <DataTemplate>
                                 <StackPanel
                                     toolkit:TiltEffect.IsTiltEnabled="True"
-                                    Margin="0,-6,0,12" Orientation="Horizontal" Tap="LongListSelector_Tap">
+                                    Margin="0,-6,0,12" Orientation="Horizontal"
+                                    Tap="OnStockPositionTap">
                                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                                     <TextBlock
                                         Text="{Binding Variation}"
@@ -98,7 +95,9 @@
             </phone:PanoramaItem>
 
             <phone:PanoramaItem>
-                <phone:LongListSelector Margin="0,-38,-22,2" ItemsSource="{Binding Items}">
+                <phone:LongListSelector
+                    Margin="0,-38,-22,2"
+                    ItemsSource="{Binding WatchList}">
                     <phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
@@ -114,12 +113,36 @@
                     </phone:LongListSelector.ListHeaderTemplate>
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
+                            <StackPanel
+                                toolkit:TiltEffect.IsTiltEnabled="True"
+                                Tap="OnStockPositionTap"
+                                Orientation="Horizontal"
+                                Margin="12,2,0,4" Height="105" Width="432">
                                 <!--Replace rectangle with image-->
-                                <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
-                                <StackPanel Width="311" Margin="8,-7,0,0">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                <Grid>
+                                    <Border BorderThickness="1"
+                                            Width="99" Height="99"
+                                            Background="{StaticResource PhoneChromeBrush}"/>
+                                    <TextBlock Text="▼"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource PhoneAccentBrush}"
+                                               FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                    <TextBlock Text="{Binding VariationString}"
+                                               VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource PhoneAccentBrush}"
+                                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                                               Padding="0 0 0 6"
+                                               />
+                                </Grid>
+
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}"
+                                               TextWrapping="Wrap" Margin="10,0"
+                                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                               FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
