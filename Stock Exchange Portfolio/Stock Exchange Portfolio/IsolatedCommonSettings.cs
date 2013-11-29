@@ -136,7 +136,7 @@ namespace Stock_Exchange_Portfolio
 
         public void Save()
         {
-            isolatedStorageSettings.Save();
+            App.IsolatedStorageSettingsNeedsSaving = true;
         }
 
         public void Add(string key, object value)

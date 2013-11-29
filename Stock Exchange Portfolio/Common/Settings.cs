@@ -23,19 +23,19 @@ namespace Common
                     if (StorageSettings.Contains("Portfolio"))
                     {
                         portfolio = (Portfolio)StorageSettings["Portfolio"];
-                        //portfolio.CollectionChanged += (sender, args) =>
-                        //{
-                        //    StorageSettings.Save();
-                        //};
+                        portfolio.CollectionChanged += (sender, args) =>
+                        {
+                            StorageSettings.Save();
+                        };
                     }
                     else
                     {
                         portfolio = new Portfolio();
                         StorageSettings.Add("Portfolio", portfolio);
-                        //portfolio.CollectionChanged += (sender, args) =>
-                        //{
-                        //    StorageSettings.Save();
-                        //};
+                        portfolio.CollectionChanged += (sender, args) =>
+                        {
+                            StorageSettings.Save();
+                        };
                     }
                 }
                 return portfolio;
