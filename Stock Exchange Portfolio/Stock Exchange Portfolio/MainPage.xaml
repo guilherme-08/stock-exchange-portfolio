@@ -27,23 +27,28 @@
     
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="how to use"
+                    Click="OnHowToUseClick"/>
+            </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="search" Click="ApplicationBarIconButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Panorama Title="stock exchange portfolio">
-            
             <phone:PanoramaItem>
                 <phone:PanoramaItem.Header>
                     <StackPanel
+                        Margin="0 -6"
                         toolkit:TiltEffect.IsTiltEnabled="True"
                         Tap="OnPortfolioTap">
                     <TextBlock
                         Text="portfolio" />
                     </StackPanel>
                 </phone:PanoramaItem.Header>
-                <Grid Margin="0 -12">
+                <Grid Margin="0 -24">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -63,7 +68,7 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
                     <StackPanel
-                        Margin="0 -6"
+                        Margin="0 -12"
                         Grid.Row="1">
                         <TextBlock Text="current value"
                                    FontSize="{StaticResource PhoneFontSizeLarge}"
@@ -90,7 +95,7 @@
                         </phone:LongListSelector.GroupHeaderTemplate>
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel
+                                <!--StackPanel
                                     toolkit:TiltEffect.IsTiltEnabled="True"
                                     Margin="0,-6,0,12" Orientation="Horizontal"
                                     Tap="OnStockPositionTap">
@@ -98,6 +103,40 @@
                                     <TextBlock
                                         Text="{Binding Variation}"
                                         TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                </-->
+                                <StackPanel
+                                toolkit:TiltEffect.IsTiltEnabled="True"
+                                Tap="OnStockPositionTap"
+                                Orientation="Horizontal"
+                                Margin="12,2,0,4" Height="105" Width="432">
+                                    <Grid>
+                                        <Border BorderThickness="1"
+                                            Width="99" Height="99"
+                                            Opacity="0.7"
+                                            Background="{StaticResource PhoneChromeBrush}"/>
+                                        <TextBlock Text="{Binding VariationSymbol}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource PhoneAccentBrush}"
+                                               FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                        <TextBlock Text="{Binding VariationString}"
+                                               VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource PhoneAccentBrush}"
+                                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                                               Padding="0 0 0 6"
+                                               />
+                                    </Grid>
+
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"
+                                               TextWrapping="Wrap" Margin="10,0"
+                                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                               FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                        <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap"
+                                               Margin="10,-2,10,0"
+                                               Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
@@ -105,7 +144,12 @@
                 </Grid>
             </phone:PanoramaItem>
 
-            <phone:PanoramaItem Header="watchlist">
+            <phone:PanoramaItem>
+                <phone:PanoramaItem.Header>
+                    <TextBlock
+                    Margin="0 -6"
+                    Text="watchlist" />
+                </phone:PanoramaItem.Header>
                 <phone:LongListSelector
                     Margin="0,-38,-22,2"
                     IsGroupingEnabled="True"
@@ -163,14 +207,5 @@
                 </phone:LongListSelector>
             </phone:PanoramaItem>
         </phone:Panorama>
-
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-
     </Grid>
 </phone:PhoneApplicationPage>

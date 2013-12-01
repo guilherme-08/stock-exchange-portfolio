@@ -27,6 +27,11 @@ namespace Stock_Exchange_Portfolio
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (NavigationService.CanGoBack)
+            {
+                // Probably came from HowToUsePage ...
+                NavigationService.RemoveBackEntry();
+            }
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
@@ -74,6 +79,11 @@ namespace Stock_Exchange_Portfolio
         private void OnPortfolioTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/PortfolioDetailsPage.xaml", UriKind.Relative));
+        }
+
+        private void OnHowToUseClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/HowToUsePage.xaml", UriKind.Relative));
         }
     }
 

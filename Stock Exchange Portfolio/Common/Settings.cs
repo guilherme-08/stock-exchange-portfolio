@@ -12,6 +12,28 @@ namespace Common
     {
         public static IStorageSettings StorageSettings;
 
+        private static bool? isFirstTime = null;
+
+        public static bool IsFirstTime
+        {
+            get
+            {
+                if (isFirstTime.HasValue == false)
+                {
+                    if (StorageSettings.Contains("IsFirstTime"))
+                    {
+                        isFirstTime = false;
+                    }
+                    else
+                    {
+                        StorageSettings.Add("IsFirstTime", false);
+                        isFirstTime = true;
+                    }
+                }
+                return isFirstTime.Value;
+            }
+        }
+
         private static Portfolio portfolio = null;
 
         public static Portfolio Portfolio
