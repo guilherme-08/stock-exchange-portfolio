@@ -75,7 +75,8 @@
                         Grid.Row="2"
                         x:Name="portfolioListGainers"
                         Margin="0,0,-22,0"
-                        IsGroupingEnabled="True" LayoutMode="List" HideEmptyGroups="False"
+                        IsGroupingEnabled="True" LayoutMode="List"
+                        HideEmptyGroups="False"
                         ItemsSource="{Binding PortfoliosCategorized}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>
@@ -104,23 +105,23 @@
                 </Grid>
             </phone:PanoramaItem>
 
-            <phone:PanoramaItem>
+            <phone:PanoramaItem Header="watchlist">
                 <phone:LongListSelector
                     Margin="0,-38,-22,2"
-                    ItemsSource="{Binding WatchList}">
-                    <phone:LongListSelector.ListHeaderTemplate>
+                    IsGroupingEnabled="True"
+                    HideEmptyGroups="True"
+                    LayoutMode="List"
+                    ItemsSource="{Binding WatchListCategorized}">
+                    <phone:LongListSelector.GroupHeaderTemplate>
                         <DataTemplate>
-                            <Grid Margin="12,0,0,38">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="watchlist"
-                                           Style="{StaticResource PanoramaItemHeaderTextStyle}"
-                                           Grid.Row="0"/>
-                            </Grid>
+                            <StackPanel Margin="12 6">
+                                <TextBlock
+                                        Foreground="{StaticResource PhoneAccentBrush}"
+                                        Text="{Binding Name}"
+                                        FontSize="32"/>
+                            </StackPanel>
                         </DataTemplate>
-                    </phone:LongListSelector.ListHeaderTemplate>
+                    </phone:LongListSelector.GroupHeaderTemplate>
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel
@@ -128,12 +129,12 @@
                                 Tap="OnStockPositionTap"
                                 Orientation="Horizontal"
                                 Margin="12,2,0,4" Height="105" Width="432">
-                                <!--Replace rectangle with image-->
                                 <Grid>
                                     <Border BorderThickness="1"
                                             Width="99" Height="99"
+                                            Opacity="0.7"
                                             Background="{StaticResource PhoneChromeBrush}"/>
-                                    <TextBlock Text="▼"
+                                    <TextBlock Text="{Binding VariationSymbol}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource PhoneAccentBrush}"
@@ -152,7 +153,9 @@
                                                TextWrapping="Wrap" Margin="10,0"
                                                Style="{StaticResource PhoneTextExtraLargeStyle}"
                                                FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap"
+                                               Margin="10,-2,10,0"
+                                               Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

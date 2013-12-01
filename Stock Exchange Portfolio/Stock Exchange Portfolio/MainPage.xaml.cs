@@ -49,6 +49,10 @@ namespace Stock_Exchange_Portfolio
                 {
                     API.GetStockVariation(stockPosition);
                 }
+                foreach (var stockPosition in App.ViewModel.WatchList)
+                {
+                    API.GetStockVariation(stockPosition);
+                }
             });
         }
 

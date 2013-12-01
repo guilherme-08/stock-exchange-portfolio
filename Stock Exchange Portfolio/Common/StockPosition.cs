@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -64,6 +65,8 @@ namespace Common
                     stockCloseYesterday = value;
                     NotifyPropertyChanged("StockCloseYesterday");
                     NotifyPropertyChanged("Variation");
+                    NotifyPropertyChanged("VariationString");
+                    NotifyPropertyChanged("VariationSymbol");
                 }
             }
         }
@@ -83,6 +86,8 @@ namespace Common
                     stockValueNow = value;
                     NotifyPropertyChanged("StockValueNow");
                     NotifyPropertyChanged("Variation");
+                    NotifyPropertyChanged("VariationString");
+                    NotifyPropertyChanged("VariationSymbol");
                 }
             }
         }
@@ -96,7 +101,7 @@ namespace Common
                     return null;
                 }
 
-                return (stockValueNow / stockCloseYesterday.Value - 1.0d) * 100.0d;
+                return stockValueNow / stockCloseYesterday.Value - 1.0d;
             }
         }
 
@@ -104,11 +109,20 @@ namespace Common
         {
             get
             {
-                return "+13.45%";
+                if (Variation.HasValue == false)
+                {
+                    return string.Empty;
+                }
+                return Variation.Value.ToString("P", CultureInfo.InvariantCulture);
+                // "+13.45%";
             }
-            set
-            {
+        }
 
+        public string VariationSymbol
+        {
+            get
+            {
+                return Variation.HasValue == false ? string.Empty : Variation.Value >= 0.0d ? "▲" : "▼";
             }
         }
 
@@ -123,7 +137,7 @@ namespace Common
 
         public int GetHashCode(object obj)
         {
-            return Name.GetHashCode();
+            return (Name + VariationSymbol + VariationString).GetHashCode();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

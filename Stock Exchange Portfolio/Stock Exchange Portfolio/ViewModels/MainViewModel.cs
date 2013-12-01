@@ -24,6 +24,9 @@ namespace Stock_Exchange_Portfolio.ViewModels
             this.WatchList.CollectionChanged += WatchListChanged;
             portfolioGainers = new PortfolioCategory() { Name = "gainers" };
             portfolioLosers = new PortfolioCategory() { Name = "losers" };
+
+            watchListGainers = new PortfolioCategory() { Name = "gainers" };
+            watchListLosers = new PortfolioCategory() { Name = "losers" };
         }
 
         public bool IsDataUpdated { get; set; }
@@ -52,7 +55,19 @@ namespace Stock_Exchange_Portfolio.ViewModels
 
         private void WatchListChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // TODO
+            App.ViewModel.watchListLosers.Clear();
+            App.ViewModel.watchListGainers.Clear();
+
+            var portfolios = WatchList.ToLookup(_ => _.Variation.HasValue && _.Variation.Value >= 0.0d);
+
+            foreach (var gainer in portfolios[true])
+            {
+                App.ViewModel.watchListGainers.Add(gainer);
+            }
+            foreach (var loser in portfolios[false])
+            {
+                App.ViewModel.watchListLosers.Add(loser);
+            }
         }
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
@@ -73,7 +88,13 @@ namespace Stock_Exchange_Portfolio.ViewModels
             PortfoliosCategorized.Add(portfolioGainers);
             PortfoliosCategorized.Add(portfolioLosers);
 
+            WatchListCategorized = new ObservableCollection<PortfolioCategory>();
+            WatchListCategorized.Add(watchListGainers);
+            WatchListCategorized.Add(watchListLosers);
+
             PortfolioChanged(this.Portfolio, null);
+            WatchListChanged(this.Portfolio, null);
+
             UpdateData();
             IsDataUpdated = IsDataLoaded = true;
         }
@@ -98,7 +119,13 @@ namespace Stock_Exchange_Portfolio.ViewModels
 
         private PortfolioCategory portfolioLosers;
 
+        private PortfolioCategory watchListGainers;
+
+        private PortfolioCategory watchListLosers;
+
         public ObservableCollection<PortfolioCategory> PortfoliosCategorized { get; set; }
+
+        public ObservableCollection<PortfolioCategory> WatchListCategorized { get; set; }
 
         public Portfolio Portfolio { get; set; }
 

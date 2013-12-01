@@ -20,9 +20,9 @@
     </vm:MainViewModel.PortfoliosCategorized>
 
     <vm:MainViewModel.WatchList xmlns="clr-namespace:Common;assembly=Common">
-        <StockPosition Name="GOOG" StockValueNow="1010" StockCloseYesterday="998" VariationString="+0.4%"/>
-        <StockPosition Name="APPL" StockValueNow="600" StockCloseYesterday="620" VariationString="+0.2%"/>
-        <StockPosition Name="YHOO" StockValueNow="30" StockCloseYesterday="32" VariationString="-51.6%"/>
+        <StockPosition Name="GOOG" StockValueNow="1010" StockCloseYesterday="998" VariationString="+0.4%" VariationSymbol="▲"/>
+        <StockPosition Name="APPL" StockValueNow="600" StockCloseYesterday="620" VariationString="+0.2%" VariationSymbol="▲"/>
+        <StockPosition Name="YHOO" StockValueNow="30" StockCloseYesterday="32" VariationString="-51.6%" VariationSymbol="▼"/>
     </vm:MainViewModel.WatchList>
 
 
