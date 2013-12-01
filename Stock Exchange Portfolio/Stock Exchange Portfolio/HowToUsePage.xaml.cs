@@ -43,7 +43,7 @@ namespace Stock_Exchange_Portfolio
         {
             if (pHowToUse.SelectedIndex == 0)
             {
-                
+                goToMainMenu();
             }
             else
             {
