@@ -66,6 +66,11 @@ namespace Stock_Exchange_Portfolio
         {
             NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
+
+        private void OnPortfolioTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PortfolioDetailsPage.xaml", UriKind.Relative));
+        }
     }
 
 }

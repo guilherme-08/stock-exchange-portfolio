@@ -24,6 +24,7 @@
             <Setter Property="GridStroke" Value="DarkGray" />
         </Style>
     </phone:PhoneApplicationPage.Resources>
+    
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="search" Click="ApplicationBarIconButton_Click"/>
@@ -33,8 +34,16 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <phone:Panorama Title="stock exchange portfolio">
             
-            <phone:PanoramaItem Header="portfolio">
-                <Grid>
+            <phone:PanoramaItem>
+                <phone:PanoramaItem.Header>
+                    <StackPanel
+                        toolkit:TiltEffect.IsTiltEnabled="True"
+                        Tap="OnPortfolioTap">
+                    <TextBlock
+                        Text="portfolio" />
+                    </StackPanel>
+                </phone:PanoramaItem.Header>
+                <Grid Margin="0 -12">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -54,6 +63,7 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
                     <StackPanel
+                        Margin="0 -6"
                         Grid.Row="1">
                         <TextBlock Text="current value"
                                    FontSize="{StaticResource PhoneFontSizeLarge}"

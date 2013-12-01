@@ -76,6 +76,7 @@ namespace Stock_Exchange_Portfolio.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

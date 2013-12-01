@@ -18,7 +18,6 @@ namespace Stock_Exchange_Portfolio
         {
             InitializeComponent();
 
-            DataContext = App.SearchViewModel;
             Loaded += PageLoaded;
         }
 
@@ -29,12 +28,27 @@ namespace Stock_Exchange_Portfolio
 
         private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(tbSearch.Text))
+            {
+                llsResults.ItemsSource = null;
+                gridNoResults.Visibility = Visibility.Collapsed;
+                return;
+            }
             progressBar.IsIndeterminate = true;
             progressBar.Visibility = Visibility.Visible;
 
             var yahooSearch = await API.GetAsync<YahooSearch>(API.Actions.Search, tbSearch.Text);
             llsResults.ItemsSource = yahooSearch.ResultSet.Result.ToList();
 
+            if (llsResults.ItemsSource.Count == 0)
+            {
+                labelSearchString.Text = "                      " + yahooSearch.ResultSet.Query;
+                gridNoResults.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                gridNoResults.Visibility = Visibility.Collapsed;
+            }
             progressBar.IsIndeterminate = false;
             progressBar.Visibility = Visibility.Collapsed;
         }

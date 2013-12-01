@@ -12,7 +12,22 @@ namespace Stock_Exchange_Portfolio.ViewModels
 {
     public class SearchViewModel : INotifyPropertyChanged
     {
-        public string SearchString { get; set; }
+        private string searchString;
+        public string SearchString
+        {
+            get
+            {
+                return searchString;
+            }
+            set
+            {
+                if (value != searchString)
+                {
+                    searchString = value;
+                    NotifyPropertyChanged("SearchString");
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

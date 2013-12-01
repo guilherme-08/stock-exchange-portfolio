@@ -8,14 +8,14 @@ namespace Common.YahooResponses
 {
     public class YahooSearch
     {
-        public YahooSearchResultSet ResultSet;
+        public YahooSearchResultSet ResultSet = new YahooSearchResultSet();
     }
 
     public class YahooSearchResultSet
     {
         public string Query;
 
-        public YahooSearchResult[] Result;
+        public YahooSearchResult[] Result = new YahooSearchResult[] {};
     }
 
     public class YahooSearchResult

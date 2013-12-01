@@ -45,13 +45,13 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <TextBlock
-                    Text="Bought Date"
+                    Text="Bought date"
                     Style="{StaticResource PhoneTextNormalStyle}"
                     />
                 <toolkit:DatePicker
                     />
                 <TextBlock
-                    Text="Number of Shares"
+                    Text="Number of shares"
                     Style="{StaticResource PhoneTextNormalStyle}"
                     />
                 <TextBox
@@ -59,7 +59,7 @@
                     InputScope="Number"
                     />
                 <TextBlock
-                    Text="Bought Price"
+                    Text="Bought price"
                     Style="{StaticResource PhoneTextNormalStyle}"
                     />
                 <TextBox
