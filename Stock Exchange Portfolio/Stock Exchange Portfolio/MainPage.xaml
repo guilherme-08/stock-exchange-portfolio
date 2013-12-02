@@ -142,61 +142,70 @@
                     Margin="0 -6"
                     Text="watchlist" />
                 </phone:PanoramaItem.Header>
-                <phone:LongListSelector
+                <Grid>
+                    <TextBlock
+                        Visibility="{Binding NoWatchListWarningVisiblity}"
+                        TextWrapping="Wrap"
+                        Text="You haven't added anything to your watchlist yet."
+                        Foreground="{StaticResource PhoneSubtleBrush}"
+                        Style="{StaticResource PhoneTextLargeStyle}">
+                    </TextBlock>
+                    <phone:LongListSelector
                     Margin="0,-38,-22,2"
                     IsGroupingEnabled="True"
                     HideEmptyGroups="True"
                     LayoutMode="List"
                     ItemsSource="{Binding WatchListCategorized}">
-                    <phone:LongListSelector.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="12 6">
-                                <TextBlock
+                        <phone:LongListSelector.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="12 6">
+                                    <TextBlock
                                         Foreground="{StaticResource PhoneAccentBrush}"
                                         Text="{Binding Name}"
                                         FontSize="32"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </phone:LongListSelector.GroupHeaderTemplate>
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.GroupHeaderTemplate>
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel
                                 toolkit:TiltEffect.IsTiltEnabled="True"
                                 Tap="OnStockPositionTap"
                                 Orientation="Horizontal"
                                 Margin="12,2,0,4" Height="105" Width="432">
-                                <Grid>
-                                    <Border BorderThickness="1"
+                                    <Grid>
+                                        <Border BorderThickness="1"
                                             Width="99" Height="99"
                                             Opacity="0.7"
                                             Background="{StaticResource PhoneChromeBrush}"/>
-                                    <TextBlock Text="{Binding VariationSymbol}"
+                                        <TextBlock Text="{Binding VariationSymbol}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource PhoneAccentBrush}"
                                                FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-                                    <TextBlock Text="{Binding VariationString}"
+                                        <TextBlock Text="{Binding VariationString}"
                                                VerticalAlignment="Bottom"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource PhoneAccentBrush}"
                                                FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                                                Padding="0 0 0 6"
                                                />
-                                </Grid>
+                                    </Grid>
 
-                                <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}"
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"
                                                TextWrapping="Wrap" Margin="10,0"
                                                Style="{StaticResource PhoneTextExtraLargeStyle}"
                                                FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap"
+                                        <TextBlock Text="{Binding StockValueNow}" TextWrapping="Wrap"
                                                Margin="10,-2,10,0"
                                                Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
     </Grid>

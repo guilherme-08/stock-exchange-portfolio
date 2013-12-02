@@ -56,7 +56,6 @@
                         Visibility="Collapsed"
                         x:Name="gridNoResults">
                         <TextBlock
-                                x:Name="d"
                                 TextWrapping="Wrap"
                                 Text="no results for "
                                 Foreground="{StaticResource PhoneSubtleBrush}"

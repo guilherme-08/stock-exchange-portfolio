@@ -68,6 +68,7 @@ namespace Stock_Exchange_Portfolio.ViewModels
             {
                 App.ViewModel.watchListLosers.Add(loser);
             }
+            NotifyPropertyChanged("NoWatchListWarningVisiblity");
         }
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
@@ -131,6 +132,15 @@ namespace Stock_Exchange_Portfolio.ViewModels
         public Portfolio WatchList { get; set; }
 
         public YahooTable PortfolioValue { get; set; }
+
+
+        public Visibility NoWatchListWarningVisiblity
+        {
+            get
+            {
+                return WatchList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
