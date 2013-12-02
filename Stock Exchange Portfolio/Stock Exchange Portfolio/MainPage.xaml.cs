@@ -61,14 +61,11 @@ namespace Stock_Exchange_Portfolio
             });
         }
 
-        private async void OnStockPositionTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void OnStockPositionTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var stockPosition = (StockPosition)((FrameworkElement)sender).DataContext;
             
-            App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
-            App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, stockPosition.Name);
-            App.StockInfoViewModel.YahooQuote.ShortName = stockPosition.Name;
-            NavigationService.Navigate(new Uri("/StockInfoPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/StockInfoPage.xaml?yahooQuote.ShortName=" + stockPosition.Name, UriKind.Relative));
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)

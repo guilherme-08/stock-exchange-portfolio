@@ -34,7 +34,7 @@ namespace Stock_Exchange_Portfolio
             }
         }
 
-        public static StockInfoViewModel StockInfoViewModel = null;
+        public static StockInfoViewModel StockInfoViewModel = new StockInfoViewModel();
 
         public static SearchViewModel SearchViewModel = new SearchViewModel();
 

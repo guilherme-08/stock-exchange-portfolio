@@ -40,6 +40,11 @@ namespace Stock_Exchange_Portfolio.ViewModels
         }
         public ObservableCollection<YahooTable> YahooTables { get; private set; }
 
+        public void ResetYahooTables()
+        {
+            YahooTables = new ObservableCollection<YahooTable>() { null, null, null, null, null, null, null };
+        }
+
         private YahooTable yahooTable;
 
         public YahooTable YahooTable
@@ -60,7 +65,8 @@ namespace Stock_Exchange_Portfolio.ViewModels
 
         public StockInfoViewModel()
         {
-            YahooTables = new ObservableCollection<YahooTable>() { null, null, null, null, null, null, null };
+            ResetYahooTables();
+            yahooQuote = new YahooQuote();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

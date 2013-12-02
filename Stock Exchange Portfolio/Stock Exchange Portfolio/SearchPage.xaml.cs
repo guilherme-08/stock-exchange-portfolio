@@ -53,16 +53,13 @@ namespace Stock_Exchange_Portfolio
             progressBar.Visibility = Visibility.Collapsed;
         }
 
-        private async void OnResultTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void OnResultTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var control = sender as FrameworkElement;
 
             var yahooSearchResult = ((YahooSearchResult) control.DataContext);
 
-            App.StockInfoViewModel = new ViewModels.StockInfoViewModel();
-            App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, yahooSearchResult.symbol);
-            App.StockInfoViewModel.YahooQuote.ShortName = yahooSearchResult.symbol;
-            NavigationService.Navigate(new Uri("/StockInfoPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/StockInfoPage.xaml?yahooQuote.ShortName=" + yahooSearchResult.symbol, UriKind.Relative));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

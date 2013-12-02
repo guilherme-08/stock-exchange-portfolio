@@ -5,6 +5,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -35,8 +36,9 @@ namespace Stock_Exchange_Portfolio
             DataContext = App.StockInfoViewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Buttons related code
             if (App.StockInfoViewModel.Stocks > 0 && ApplicationBar.Buttons.Count == 3)
             {
                 var sellButton = new ApplicationBarIconButton(new Uri("Assets/AppBar/minus.png", UriKind.Relative));
@@ -58,6 +60,19 @@ namespace Stock_Exchange_Portfolio
             {
                 AppBarFavoriteIconButton.IconUri = AssetAddFavorite;
             }
+
+            // Binding related code
+            if (NavigationContext.QueryString.ContainsKey("yahooQuote.ShortName"))
+            {
+                string shortName = NavigationContext.QueryString["yahooQuote.ShortName"];
+
+                if (App.StockInfoViewModel.YahooQuote.ShortName != shortName)
+                {
+                    App.StockInfoViewModel.ResetYahooTables();
+                    App.StockInfoViewModel.YahooQuote = new YahooQuote { ShortName = shortName };
+                    App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, shortName);
+                }
+            }
         }
 
         private async void OnStocksGraphsSelectionChanged(object sender, SelectionChangedEventArgs args)
@@ -73,6 +88,11 @@ namespace Stock_Exchange_Portfolio
 
                 var taskResult = API.GetAsync<YahooTable>(API.Actions.GetTable, yahooGoogRequest.ToString());
                 App.StockInfoViewModel.YahooTables[index] = await taskResult;
+                progressBar.IsIndeterminate = false;
+                progressBar.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
                 progressBar.IsIndeterminate = false;
                 progressBar.Visibility = System.Windows.Visibility.Collapsed;
             }
