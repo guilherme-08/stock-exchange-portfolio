@@ -44,6 +44,24 @@ namespace Stock_Exchange_Portfolio.ViewModels
             }
         }
 
+        private double stocksValueNow;
+
+        public double StocksValueNow
+        {
+            get
+            {
+                return stocksValueNow;
+            }
+            set
+            {
+                if (value != stocksValueNow)
+                {
+                    stocksValueNow = value;
+                    NotifyPropertyChanged("StocksValueNow");
+                }
+            }
+        }
+
         public double Opacity { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

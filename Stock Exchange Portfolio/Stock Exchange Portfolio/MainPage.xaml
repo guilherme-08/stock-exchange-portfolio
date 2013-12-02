@@ -48,7 +48,7 @@
                         Text="portfolio" />
                     </StackPanel>
                 </phone:PanoramaItem.Header>
-                <Grid Margin="0 -24">
+                <Grid Margin="0 -24 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -67,21 +67,13 @@
                                 Title="Portfolio Value" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
-                    <StackPanel
-                        Margin="0 -12"
-                        Grid.Row="1">
-                        <TextBlock Text="current value"
-                                   FontSize="{StaticResource PhoneFontSizeLarge}"
-                                   Style="{StaticResource PhoneTextAccentStyle}" />
-                        <TextBlock Text="{Binding PortfolioCurrentValue}"
-                                   Style="{StaticResource PhoneTextLargeStyle}" />
-                    </StackPanel>
                     <phone:LongListSelector
                         Grid.Row="2"
                         x:Name="portfolioListGainers"
-                        Margin="0,0,-22,0"
-                        IsGroupingEnabled="True" LayoutMode="List"
-                        HideEmptyGroups="False"
+                        Margin="0,-12,-22,0"
+                        IsGroupingEnabled="True"
+                        LayoutMode="List"
+                        HideEmptyGroups="True"
                         ItemsSource="{Binding PortfoliosCategorized}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>

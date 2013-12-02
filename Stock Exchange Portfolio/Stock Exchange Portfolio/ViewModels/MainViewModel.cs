@@ -110,7 +110,6 @@ namespace Stock_Exchange_Portfolio.ViewModels
             {
                 PortfolioValue = portfolioValue;
                 NotifyPropertyChanged("PortfolioValue");
-                NotifyPropertyChanged("PortfolioCurrentValue");
                 this.IsDataUpdated = true;
             });
         }
@@ -132,18 +131,6 @@ namespace Stock_Exchange_Portfolio.ViewModels
         public Portfolio WatchList { get; set; }
 
         public YahooTable PortfolioValue { get; set; }
-
-        public String PortfolioCurrentValue
-        {
-            get
-            {
-                if (PortfolioValue == null || PortfolioValue.Count == 0)
-                {
-                    return "0";
-                }
-                return PortfolioValue.Last().Close.ToString(".##", CultureInfo.InvariantCulture);
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

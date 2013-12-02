@@ -34,68 +34,160 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="12,17,0,0">
             <TextBlock Text="MY PORTFOLIO" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="details" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
+            <phone:Pivot>
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                                   Text="shares count"/>
+                    </phone:PivotItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-            <amq:PieChart
-                Height="200"
-                Grid.Row="0"
-                DataSource="{Binding PortfolioDetails}"
-                TitleMemberPath="StockName" 
-                ValueMemberPath="StocksCount"
-                Foreground="{StaticResource PhoneForegroundBrush}"
-                >
-                <amq:PieChart.Brushes>
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.8" />
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.6" />
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.4" />
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.2" />
-                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.1" />
-                </amq:PieChart.Brushes>
-            </amq:PieChart>
+                        <StackPanel
+                            Margin="0 -12"
+                            Grid.Row="0">
+                            <TextBlock Text="current shares count"
+                                       FontSize="{StaticResource PhoneFontSizeLarge}"
+                                       Style="{StaticResource PhoneTextAccentStyle}" />
+                            <TextBlock Text="{Binding PortfolioCurrentSharesCount}"
+                                       Style="{StaticResource PhoneTextLargeStyle}" />
+                        </StackPanel>
 
-            <ListBox
-                Grid.Row="1"
-                ItemsSource="{Binding PortfolioDetails}"
-                >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <ListBoxItem>
-                            <StackPanel
-                                Tap="OnStockTap"
-                                tookit:TiltEffect.IsTiltEnabled="True"
-                                Orientation="Horizontal">
-                                <Border BorderThickness="1"
-                                            Width="12" Height="99"
-                                            Background="{StaticResource PhoneAccentBrush}" Opacity="{Binding Opacity}"/>
-                                <StackPanel
-                                    Margin="0,-6,0,12"
-                                    Orientation="Vertical"
-                                    >
-                                    <TextBlock
-                                        Text="{Binding StockName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"
-                                        FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-                                    <TextBlock
-                                        Text="{Binding StocksCount}"
-                                        TextWrapping="Wrap"
-                                        Style="{StaticResource PhoneTextSubtleStyle}"
-                                        />
-                                </StackPanel>
-                            </StackPanel>
-                        </ListBoxItem>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                        <amq:PieChart
+                            Height="220"
+                            Grid.Row="1"
+                            DataSource="{Binding PortfolioDetails}"
+                            TitleMemberPath="StockName" 
+                            ValueMemberPath="StocksCount"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            >
+                            <amq:PieChart.Brushes>
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.8" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.6" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.4" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.2" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.1" />
+                            </amq:PieChart.Brushes>
+                        </amq:PieChart>
+
+                        <ListBox
+                            Grid.Row="2"
+                            ItemsSource="{Binding PortfolioDetails}"
+                            >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem>
+                                        <StackPanel
+                                            Tap="OnStockTap"
+                                            tookit:TiltEffect.IsTiltEnabled="True"
+                                            Orientation="Horizontal">
+                                            <Border BorderThickness="1"
+                                                        Width="12" Height="99"
+                                                        Background="{StaticResource PhoneAccentBrush}" Opacity="{Binding Opacity}"/>
+                                            <StackPanel
+                                                Margin="0,-6,0,12"
+                                                Orientation="Vertical"
+                                                >
+                                                <TextBlock
+                                                    Text="{Binding StockName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                                    FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                                <TextBlock
+                                                    Text="{Binding StocksCount}"
+                                                    TextWrapping="Wrap"
+                                                    Style="{StaticResource PhoneTextSubtleStyle}"
+                                                    />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                                   Text="value"/>
+                    </phone:PivotItem.Header>
+                    <Grid Margin="0 -18 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel
+                            Margin="0 -12"
+                            Grid.Row="0">
+                            <TextBlock Text="current value"
+                                       FontSize="{StaticResource PhoneFontSizeLarge}"
+                                       Style="{StaticResource PhoneTextAccentStyle}" />
+                            <TextBlock Text="{Binding PortfolioCurrentValue}"
+                                       Style="{StaticResource PhoneTextLargeStyle}" />
+                        </StackPanel>
+                        <amq:PieChart
+                            Height="220"
+                            Grid.Row="1"
+                            DataSource="{Binding PortfolioDetails}"
+                            TitleMemberPath="StockName" 
+                            ValueMemberPath="StocksValueNow"
+                            Foreground="{StaticResource PhoneForegroundBrush}">
+                            <amq:PieChart.Brushes>
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.8" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.6" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.4" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.2" />
+                                <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.1" />
+                            </amq:PieChart.Brushes>
+                        </amq:PieChart>
+                        <ListBox
+                            Grid.Row="2"
+                            ItemsSource="{Binding PortfolioDetails}"
+                            >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem>
+                                        <StackPanel
+                                            Tap="OnStockTap"
+                                            tookit:TiltEffect.IsTiltEnabled="True"
+                                            Orientation="Horizontal">
+                                            <Border BorderThickness="1"
+                                                        Width="12" Height="99"
+                                                        Background="{StaticResource PhoneAccentBrush}" Opacity="{Binding Opacity}"/>
+                                            <StackPanel
+                                                Margin="0,-6,0,12"
+                                                Orientation="Vertical"
+                                                >
+                                                <TextBlock
+                                                    Text="{Binding StockName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"
+                                                    FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                                <TextBlock
+                                                    Text="{Binding StocksValueNow}"
+                                                    TextWrapping="Wrap"
+                                                    Style="{StaticResource PhoneTextSubtleStyle}"
+                                                    />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </phone:PivotItem>
+            </phone:Pivot>
         </Grid>
     </Grid>
 

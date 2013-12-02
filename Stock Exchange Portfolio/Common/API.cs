@@ -66,7 +66,7 @@ namespace Common
             if (stockPosition.StockCloseYesterday == null)
             {
                 var yahooRequest = new YahooTableRequest(stockPosition.Name);
-                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0)); // -4 days because weekend
+                yahooRequest.InitialDate = DateTime.Now.Subtract(new TimeSpan(6, 0, 0, 0)); // -4 days because weekend, -2 because holidays
                 yahooRequest.Periodicity = YahooTableRequest.PeriodicityTypes.Daily;
 
                 var yahooTable = await GetAsync<YahooTable>(Actions.GetTable, yahooRequest.ToString());
@@ -74,7 +74,10 @@ namespace Common
                 var lastDay = yahooTable.Last();
                 if (stockPosition.StockValueNow == 0 || yahooQuote.Date.Equals(lastDay.Date))
                 {
-                    stockPosition.StockCloseYesterday = (yahooTable[yahooTable.Count - 2] ?? new YahooTableEntry()).Close;
+                    if (yahooTable.Count >= 2)
+                    {
+                        stockPosition.StockCloseYesterday = (yahooTable[yahooTable.Count - 2] ?? new YahooTableEntry()).Close;
+                    }
                 }
                 else
                 {

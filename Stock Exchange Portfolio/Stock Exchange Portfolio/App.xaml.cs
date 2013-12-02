@@ -147,6 +147,13 @@ namespace Stock_Exchange_Portfolio
             }
             MessageBox.Show(e.ExceptionObject.Message);
             MessageBox.Show(e.ExceptionObject.StackTrace);
+
+            // Attempt to save!
+            if (IsolatedStorageSettingsNeedsSaving)
+            {
+                IsolatedStorageSettings.ApplicationSettings.Save();
+                IsolatedStorageSettingsNeedsSaving = false;
+            }
         }
 
         #region Phone application initialization
