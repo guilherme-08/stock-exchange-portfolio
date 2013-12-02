@@ -24,7 +24,7 @@ namespace Stock_Exchange_Portfolio
 
         private const string RemoveText = "remove";
 
-        private static readonly int[] stocksGraphsDates = new int[] { 5, 15, 30, 60, 120, 360 };
+        private static readonly int[] stocksGraphsDates = new int[] { 5, 15, 30, 60, 120, 360, 720 };
 
         ApplicationBarIconButton AppBarFavoriteIconButton;
 

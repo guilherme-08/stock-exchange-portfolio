@@ -60,7 +60,7 @@ namespace Stock_Exchange_Portfolio.ViewModels
 
         public StockInfoViewModel()
         {
-            YahooTables = new ObservableCollection<YahooTable>() { null, null, null, null, null, null };
+            YahooTables = new ObservableCollection<YahooTable>() { null, null, null, null, null, null, null };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

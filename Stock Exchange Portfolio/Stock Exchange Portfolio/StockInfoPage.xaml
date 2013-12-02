@@ -222,6 +222,19 @@
                                 </amq:SerialChart.Graphs>
                             </amq:SerialChart>
                         </phone:PivotItem>
+                        <phone:PivotItem>
+                            <phone:PivotItem.Header>
+                                <TextBlock FontSize="31" Text="720"/>
+                            </phone:PivotItem.Header>
+                            <amq:SerialChart
+                            Style="{StaticResource chartStyle}" 
+                            DataSource="{Binding YahooTables[6]}" 
+                            CategoryValueMemberPath="DateString" Height="173">
+                                <amq:SerialChart.Graphs>
+                                    <amq:AreaGraph ValueMemberPath="Close" Title="{Binding YahooQuote.ShortName}" Brush="{StaticResource PhoneAccentBrush}" />
+                                </amq:SerialChart.Graphs>
+                            </amq:SerialChart>
+                        </phone:PivotItem>
                     </phone:Pivot>
                     <ProgressBar
                         x:Name="progressBar"
