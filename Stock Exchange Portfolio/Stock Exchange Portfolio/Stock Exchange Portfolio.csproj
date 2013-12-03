@@ -189,6 +189,7 @@
     <Content Include="Assets\AppBar\favs.png" />
     <Content Include="Assets\AppBar\feature.search.png" />
     <Content Include="Assets\AppBar\minus.png" />
+    <Content Include="Assets\AppBar\pin.png" />
     <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\mainmenu.png" />
     <Content Include="Assets\mainmenu2.png" />
@@ -227,16 +228,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\amCharts-Quick-Charts\QuickChartsWP\QuickChartsWP.csproj">
+      <Project>{31FDBFD7-6F93-4D3C-8C1A-58D87E915EC5}</Project>
+      <Name>QuickChartsWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{7541EAC7-842C-49F6-AA5E-3281EE19906A}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AmCharts.Windows.QuickCharts.WP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>

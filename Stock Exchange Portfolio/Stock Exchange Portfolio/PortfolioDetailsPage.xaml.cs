@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using Common;
 using Common.YahooResponses;
 using Stock_Exchange_Portfolio.ViewModels;
+using AmCharts.Windows.QuickCharts;
 
 namespace Stock_Exchange_Portfolio
 {
@@ -25,6 +26,11 @@ namespace Stock_Exchange_Portfolio
             var stockPosition = (PortfolioDetailsModel)((FrameworkElement)sender).DataContext;
 
             NavigationService.Navigate(new Uri("/StockInfoPage.xaml?yahooQuote.ShortName=" + stockPosition.StockName, UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ((PortfolioDetailsViewModel) DataContext).Reset();
         }
     }
 }

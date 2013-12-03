@@ -40,7 +40,7 @@
                 Text="add"
                 Click="OnWatchListClick"/>
             <shell:ApplicationBarIconButton
-                IconUri="/Assets/AppBar/save.png"
+                IconUri="/Assets/AppBar/pin.png"
                 Text="pin to sart"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

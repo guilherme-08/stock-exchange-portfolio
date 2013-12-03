@@ -41,13 +41,12 @@ namespace Common
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.CreateHttp(uri);
             request.AllowReadStreamBuffering = true;
-            
-            //var task = Task<WebResponse>.Factory.FromAsync(
-            //    new Func<AsyncCallback, object, IAsyncResult>(request.BeginGetResponse),
-            //    new Func<IAsyncResult, WebResponse>(request.EndGetResponse), TaskCreationOptions.HideScheduler);
-            //var response = await task;
 
-            var response = await request.GetResponseAsync();
+                var task = Task<WebResponse>.Factory.FromAsync(
+                    new Func<AsyncCallback, object, IAsyncResult>(request.BeginGetResponse),
+                    new Func<IAsyncResult, WebResponse>(request.EndGetResponse), TaskCreationOptions.HideScheduler);
+                var response = await task;
+
             using (Stream streamResponse = response.GetResponseStream())
             using (StreamReader streamRead = new StreamReader(streamResponse, Encoding.UTF8))
             {

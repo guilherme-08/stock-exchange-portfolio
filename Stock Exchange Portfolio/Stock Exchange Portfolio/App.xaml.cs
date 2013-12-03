@@ -11,6 +11,7 @@ using Microsoft.Phone.Shell;
 using Stock_Exchange_Portfolio.Resources;
 using Stock_Exchange_Portfolio.ViewModels;
 using System.IO.IsolatedStorage;
+using System.Net;
 
 namespace Stock_Exchange_Portfolio
 {
@@ -63,6 +64,8 @@ namespace Stock_Exchange_Portfolio
 
             // Language display initialization
             InitializeLanguage();
+
+            
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
@@ -137,9 +140,24 @@ namespace Stock_Exchange_Portfolio
             }
         }
 
+        DateTime LastWebExpcetionError = new DateTime();
+
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            if (e.ExceptionObject is WebException)
+            {
+                if ((DateTime.Now - LastWebExpcetionError).TotalSeconds > 30)
+                {
+                    MessageBox.Show(
+                        "The internet connection seems to be down.\n" +
+                        "Make sure flight mode is turned off and check your mobile data or WiFi connection",
+                        "Internet connection", MessageBoxButton.OK);
+                    LastWebExpcetionError = DateTime.Now;
+                }
+                e.Handled = true;
+                return;
+            }
             if (Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger

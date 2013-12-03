@@ -106,11 +106,16 @@ namespace Stock_Exchange_Portfolio.ViewModels
             {
                 return;
             }
+            if (GraphVisibility == Visibility.Collapsed)
+            {
+                PortfolioValue = new YahooTable();
+            }
             var portfolioValue = await API.GetPortfolioValue(this.Portfolio, 30);
             Deployment.Current.Dispatcher.BeginInvoke(delegate
             {
                 PortfolioValue = portfolioValue;
                 NotifyPropertyChanged("PortfolioValue");
+                NotifyPropertyChanged("GraphVisibility");
                 this.IsDataUpdated = true;
             });
         }
@@ -133,12 +138,19 @@ namespace Stock_Exchange_Portfolio.ViewModels
 
         public YahooTable PortfolioValue { get; set; }
 
-
         public Visibility NoWatchListWarningVisiblity
         {
             get
             {
                 return WatchList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility GraphVisibility
+        {
+            get
+            {
+                return App.ViewModel.Portfolio == null || App.ViewModel.Portfolio.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

@@ -67,7 +67,7 @@
                         <StackPanel>
                             <TextBlock
                                 Style="{StaticResource PhoneTextTitle2Style}"
-                                Margin="0 24"
+                                Margin="0 24 0 0"
                                 TextWrapping="Wrap"
                                 Text="To add something to your portfolio, press search in the main page to find a stock." />
                             <Image Source="/Assets/mainmenu.png" Width="300" />
@@ -85,7 +85,7 @@
                     Margin="12 0">
                     <TextBlock
                         Style="{StaticResource PhoneTextTitle1Style}"
-                        Margin="0 24"
+                        Margin="0 24 0 0"
                         Text="your portfolio" />
                     <ScrollViewer>
                         <StackPanel>
@@ -112,7 +112,7 @@
                                 Style="{StaticResource PhoneTextTitle2Style}"
                                 Margin="0 24"
                                 TextWrapping="Wrap"
-                                Text="The watchlist represent stocks you don't own, but you are interested in following." />
+                                Text="The watchlist represent the stocks you are interested in following." />
                             <Image Source="/Assets/watchlist.png" Width="300" />
                         </StackPanel>
                     </ScrollViewer>

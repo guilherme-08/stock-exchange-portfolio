@@ -47,7 +47,7 @@
                         <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                                    Text="shares count"/>
                     </phone:PivotItem.Header>
-                    <Grid>
+                    <Grid x:Name="gridSharesCount">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto" />
@@ -67,11 +67,11 @@
                         <amq:PieChart
                             Height="220"
                             Grid.Row="1"
+                            Visibility="{Binding GraphVisibility}"
                             DataSource="{Binding PortfolioDetails}"
                             TitleMemberPath="StockName" 
                             ValueMemberPath="StocksCount"
-                            Foreground="{StaticResource PhoneForegroundBrush}"
-                            >
+                            Foreground="{StaticResource PhoneForegroundBrush}">
                             <amq:PieChart.Brushes>
                                 <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
                                 <SolidColorBrush Color="{StaticResource PhoneAccentColor}" Opacity="0.8" />
@@ -84,6 +84,7 @@
 
                         <ListBox
                             Grid.Row="2"
+                            Visibility="{Binding GraphVisibility}"
                             ItemsSource="{Binding PortfolioDetails}"
                             >
                             <ListBox.ItemTemplate>
@@ -138,8 +139,11 @@
                                        Style="{StaticResource PhoneTextLargeStyle}" />
                         </StackPanel>
                         <amq:PieChart
+                            x:Name="graphValue"
                             Height="220"
                             Grid.Row="1"
+                            UseLayoutRounding="False"
+                            Visibility="{Binding GraphVisibility}"
                             DataSource="{Binding PortfolioDetails}"
                             TitleMemberPath="StockName" 
                             ValueMemberPath="StocksValueNow"
@@ -155,6 +159,7 @@
                         </amq:PieChart>
                         <ListBox
                             Grid.Row="2"
+                            Visibility="{Binding GraphVisibility}"
                             ItemsSource="{Binding PortfolioDetails}"
                             >
                             <ListBox.ItemTemplate>

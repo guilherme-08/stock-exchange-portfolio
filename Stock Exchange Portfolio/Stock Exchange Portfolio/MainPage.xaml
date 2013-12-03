@@ -58,7 +58,8 @@
                         Grid.Row="0"
                         Name="pie1"
                         Style="{StaticResource chartStyle}"
-                        DataSource="{Binding PortfolioValue}" 
+                        DataSource="{Binding PortfolioValue}"
+                        Visibility="{Binding GraphVisibility}"
                         CategoryValueMemberPath="DateString" Height="160">
                         <amq:SerialChart.Graphs>
                             <amq:AreaGraph
