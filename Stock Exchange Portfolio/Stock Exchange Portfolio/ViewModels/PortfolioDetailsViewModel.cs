@@ -69,7 +69,7 @@ namespace Stock_Exchange_Portfolio.ViewModels
                 {
                     return "0";
                 }
-                return App.ViewModel.Portfolio.Sum(_ => _.StockValueNow).ToString(".##", CultureInfo.InvariantCulture);
+                return App.ViewModel.Portfolio.Sum(_ => _.StockValueNow * _.NumberOfShares).ToString(".##", CultureInfo.InvariantCulture);
             }
         }
 
