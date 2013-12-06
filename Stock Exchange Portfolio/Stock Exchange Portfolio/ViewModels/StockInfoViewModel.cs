@@ -34,7 +34,7 @@ namespace Stock_Exchange_Portfolio.ViewModels
         {
             get
             {
-                var stockPosition = Settings.Portfolio.GetStockPosition(YahooQuote.ShortName);
+                var stockPosition = App.ViewModel.Portfolio.GetStockPosition(YahooQuote.ShortName);
                 return stockPosition == null ? 0 : stockPosition.NumberOfShares;
             }
         }

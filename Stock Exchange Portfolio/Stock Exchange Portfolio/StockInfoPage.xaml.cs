@@ -38,6 +38,20 @@ namespace Stock_Exchange_Portfolio
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Binding related code
+            bool performRequest = false;
+            if (NavigationContext.QueryString.ContainsKey("yahooQuote.ShortName"))
+            {
+                string shortName = NavigationContext.QueryString["yahooQuote.ShortName"];
+
+                if (App.StockInfoViewModel.YahooQuote.ShortName != shortName)
+                {
+                    App.StockInfoViewModel.ResetYahooTables();
+                    App.StockInfoViewModel.YahooQuote = new YahooQuote { ShortName = shortName };
+                    performRequest = true;
+                }
+            }
+
             // Buttons related code
             if (App.StockInfoViewModel.Stocks > 0 && ApplicationBar.Buttons.Count == 3)
             {
@@ -52,7 +66,7 @@ namespace Stock_Exchange_Portfolio
             }
 
             AppBarFavoriteIconButton = (ApplicationBarIconButton)ApplicationBar.Buttons[ApplicationBar.Buttons.Count - 2];
-            if (Settings.WatchList.Any(stock => stock.Name == App.StockInfoViewModel.YahooQuote.ShortName))
+            if (App.ViewModel.WatchList.Any(stock => stock.Name == App.StockInfoViewModel.YahooQuote.ShortName))
             {
                 AppBarFavoriteIconButton.IconUri = AssetRemoveFavorite;
             }
@@ -60,18 +74,9 @@ namespace Stock_Exchange_Portfolio
             {
                 AppBarFavoriteIconButton.IconUri = AssetAddFavorite;
             }
-
-            // Binding related code
-            if (NavigationContext.QueryString.ContainsKey("yahooQuote.ShortName"))
+            if (performRequest)
             {
-                string shortName = NavigationContext.QueryString["yahooQuote.ShortName"];
-
-                if (App.StockInfoViewModel.YahooQuote.ShortName != shortName)
-                {
-                    App.StockInfoViewModel.ResetYahooTables();
-                    App.StockInfoViewModel.YahooQuote = new YahooQuote { ShortName = shortName };
-                    App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, shortName);
-                }
+                App.StockInfoViewModel.YahooQuote = await API.GetAsync<YahooQuote>(API.Actions.GetQuote, App.StockInfoViewModel.YahooQuote.ShortName);
             }
         }
 
