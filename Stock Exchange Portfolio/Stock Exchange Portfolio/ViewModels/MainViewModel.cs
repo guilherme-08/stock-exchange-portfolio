@@ -145,6 +145,13 @@ namespace Stock_Exchange_Portfolio.ViewModels
                 return WatchList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
             }
         }
+        public Visibility NoPortfolioVisiblity
+        {
+            get
+            {
+                return Portfolio.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         public Visibility GraphVisibility
         {

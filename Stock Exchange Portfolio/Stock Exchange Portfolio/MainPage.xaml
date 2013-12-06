@@ -54,20 +54,29 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <amq:SerialChart
-                        Grid.Row="0"
-                        Name="pie1"
-                        Style="{StaticResource chartStyle}"
-                        DataSource="{Binding PortfolioValue}"
-                        Visibility="{Binding GraphVisibility}"
-                        CategoryValueMemberPath="DateString" Height="160">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph
+                    <Grid
+                        Grid.Row="0">
+                        <TextBlock
+                            Visibility="{Binding NoPortfolioVisiblity}"
+                            TextWrapping="Wrap"
+                            Text="You haven't added any shares to your portfolio."
+                            Foreground="{StaticResource PhoneSubtleBrush}"
+                            Style="{StaticResource PhoneTextLargeStyle}">
+                        </TextBlock>
+                        <amq:SerialChart
+                            Name="pie1"
+                            Style="{StaticResource chartStyle}"
+                            DataSource="{Binding PortfolioValue}"
+                            Visibility="{Binding GraphVisibility}"
+                            CategoryValueMemberPath="DateString" Height="160">
+                            <amq:SerialChart.Graphs>
+                                <amq:AreaGraph
                                 ValueMemberPath="Close"
                                 Brush="{StaticResource PhoneAccentBrush}"
                                 Title="Portfolio Value" />
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                            </amq:SerialChart.Graphs>
+                        </amq:SerialChart>
+                    </Grid>
                     <phone:LongListSelector
                         Grid.Row="2"
                         x:Name="portfolioListGainers"
