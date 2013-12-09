@@ -39,9 +39,9 @@
                 IconUri="/Assets/AppBar/favs.addto.png"
                 Text="add"
                 Click="OnWatchListClick"/>
-            <shell:ApplicationBarIconButton
+            <!--shell:ApplicationBarIconButton
                 IconUri="/Assets/AppBar/pin.png"
-                Text="pin to sart"/>
+                Text="pin to sart"/-->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     

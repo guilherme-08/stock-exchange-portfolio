@@ -53,7 +53,7 @@ namespace Stock_Exchange_Portfolio
             }
 
             // Buttons related code
-            if (App.StockInfoViewModel.Stocks > 0 && ApplicationBar.Buttons.Count == 3)
+            if (App.StockInfoViewModel.Stocks > 0 && ApplicationBar.Buttons.Count == 2)
             {
                 var sellButton = new ApplicationBarIconButton(new Uri("Assets/AppBar/minus.png", UriKind.Relative));
                 sellButton.Text = "sell";
@@ -65,7 +65,7 @@ namespace Stock_Exchange_Portfolio
                 ApplicationBar.Buttons.RemoveAt(1);
             }
 
-            AppBarFavoriteIconButton = (ApplicationBarIconButton)ApplicationBar.Buttons[ApplicationBar.Buttons.Count - 2];
+            AppBarFavoriteIconButton = (ApplicationBarIconButton)ApplicationBar.Buttons[ApplicationBar.Buttons.Count - 1];
             if (App.ViewModel.WatchList.Any(stock => stock.Name == App.StockInfoViewModel.YahooQuote.ShortName))
             {
                 AppBarFavoriteIconButton.IconUri = AssetRemoveFavorite;

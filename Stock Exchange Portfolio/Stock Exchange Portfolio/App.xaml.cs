@@ -151,7 +151,7 @@ namespace Stock_Exchange_Portfolio
                 {
                     MessageBox.Show(
                         "The internet connection seems to be down.\n" +
-                        "Make sure flight mode is turned off and check your mobile data or WiFi connection",
+                        "Make sure flight mode is turned off and check your mobile data or WiFi connection.",
                         "Internet connection", MessageBoxButton.OK);
                     LastWebExpcetionError = DateTime.Now;
                 }

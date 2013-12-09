@@ -107,10 +107,10 @@
                                         TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                                 </-->
                                 <StackPanel
-                                toolkit:TiltEffect.IsTiltEnabled="True"
-                                Tap="OnStockPositionTap"
-                                Orientation="Horizontal"
-                                Margin="12,2,0,4" Height="105" Width="432">
+                                    toolkit:TiltEffect.IsTiltEnabled="True"
+                                    Tap="OnStockPositionTap"
+                                    Orientation="Horizontal"
+                                    Margin="12,2,0,4" Height="105" MinWidth="432">
                                     <Grid>
                                         <Border BorderThickness="1"
                                             Width="99" Height="99"
@@ -182,7 +182,7 @@
                                 toolkit:TiltEffect.IsTiltEnabled="True"
                                 Tap="OnStockPositionTap"
                                 Orientation="Horizontal"
-                                Margin="12,2,0,4" Height="105" Width="432">
+                                Margin="12,2,0,4" Height="105" MinWidth="432">
                                     <Grid>
                                         <Border BorderThickness="1"
                                             Width="99" Height="99"

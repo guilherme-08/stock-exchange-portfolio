@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Phone.Scheduler;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone.Shell;
 
 namespace LiveTilesController
 {
@@ -12,19 +13,23 @@ namespace LiveTilesController
         /// </remarks>
         static ScheduledAgent()
         {
-            // Subscribe to the managed exception handler
             Deployment.Current.Dispatcher.BeginInvoke(delegate
             {
                 Application.Current.UnhandledException += UnhandledException;
+
+                FlipTileData primaryTileData = new FlipTileData();
+                primaryTileData.Count = 0;
+                primaryTileData.BackContent = "";
+
+                ShellTile primaryTile = ShellTile.ActiveTiles.GetEnumerator().Current;
+                primaryTile.Update(primaryTileData);
             });
         }
 
-        /// Code to execute on Unhandled Exceptions
         private static void UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             if (Debugger.IsAttached)
             {
-                // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
         }
